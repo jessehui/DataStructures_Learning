@@ -64,9 +64,32 @@ node* reverse_recursive(node *head)
     return head;
     node* second = head->next;
     node* new_head = reverse_recursive(second);
+    second->next = head;
+    head->next = nullptr;
+    return new_head;
 
 }
 ```
+时间复杂度计算: 
+T(0) = O(1);  
+T(1) = O(1);  
+T(n) = T(n-1) + O(1);  
+     = T(n-2) + O(1) + O(1);  
+     = T(n-3) + O(1) + O(1);  
+     = n*O(1);  
+     = O(n);    
+
+this指针:  
+`node(int payload) {this->payload = payload;};`  
+1. this指针是一个隐含于每一个成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
+2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给this指针，然后调用成员函数，每次成员函数存取数据成员时，由隐含使用this指针。
+3. 当一个成员函数被调用时，自动向它传递一个隐含的参数，该参数是一个指向这个成员函数所在的对象的指针。 
+4. 在C++中，this指针被隐含地声明为: X *const this,这意味着不能给this 指针赋值；
+   在X类的const成员函数中，this指针的类型为：const X* const, 这说明this指针所指向的这种对象是不可修改的（即不能对这种对象的数据成员进行赋值操作）; 
+5. 由于this并不是一个常规变量，所以，不能取得this的地址。
+
+关于C++的类中 private, public, protected:  
+
 
 
 

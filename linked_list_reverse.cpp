@@ -24,6 +24,17 @@ node * reverse_recursive(node *head)    //递归方法 返回新的头
     head->next = nullptr;
     return new_head;
 }
+node * reverse_recursive2(node *head)
+{
+    if(head == nullptr || head->next == nullptr)    //如果是最后一个元素
+        return head;
+    node * second = head->next;
+    node *new_head = reverse_recursive(second); //递归调用  最后一次递归会把head赋给原来的最后一个元素
+    second->next = head;
+    head->next = nullptr;
+    return new_head;
+    
+}
 
 int main()
 {
@@ -47,3 +58,5 @@ int main()
     
     return 0;
 }
+
+
