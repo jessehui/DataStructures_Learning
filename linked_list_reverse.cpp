@@ -19,18 +19,18 @@ node * reverse_recursive(node *head)    //递归方法 返回新的头
     if(head == nullptr || head->next == nullptr)
         return head;
     node *second = head->next;  //old second
-    node *new_head = reverse_recursive(second);
+    node *new_head = reverse_recursive(second); //分析的时候不用看这个函数因为不影响下边的语句
     second->next = head;    //一旦有返回了, 就可以开始下一个
-    head->next = nullptr;
+    head->next = nullptr;   
     return new_head;
 }
 node * reverse_recursive2(node *head)
 {
-    if(head == nullptr || head->next == nullptr)    //如果是最后一个元素
+    if(head == nullptr || head->next == nullptr)    //如果是最后一个元素或者本身是一个空链表
         return head;
     node * second = head->next;
-    node *new_head = reverse_recursive(second); //递归调用  最后一次递归会把head赋给原来的最后一个元素
-    second->next = head;
+    node *new_head = reverse_recursive(second); //递归调用  最后一次递归会把head赋给原来的最后一个元素. 
+    second->next = head;// "second" now is the last element. 在最底层递归里边传进去的是最后一个元素返回的也是. head is the last but one element.
     head->next = nullptr;
     return new_head;
     
