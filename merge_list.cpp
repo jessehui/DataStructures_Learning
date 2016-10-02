@@ -102,7 +102,7 @@ linked_list merge(linked_list a, linked_list b)
             result.push_back(b.front());    //先放小数
             b.pop_front();
         }
-        else
+        else    //包含相等的时候
         {
             result.push_back(a.front());
             a.pop_front();
