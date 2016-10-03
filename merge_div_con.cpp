@@ -2,7 +2,7 @@
 using namespace std;
 
 //merge two sorted sub-array
-//left表示左边序列的第一个元素, right表示右边最后一个元素. middle表示序列中间的那个index值
+//left表示左边序列的第一个元素, right可以看作长度. middle表示序列中间的那个index值
 void merge(int array[], int temp[], int left, int middle, int right)
 {
 	int p_left = left, p_right = middle;	//index 左右数组第一个元素
@@ -67,7 +67,7 @@ void merge_sort_non_recursive(int array[], int length)
 	for(int step = 1; step < length; step = 2*step)
 		for(int left = 0; left < length; left = left + 2 * step)
 		{
-			int middle = min(left+step, length);
+			int middle = min(left+step, length);	//防止index溢出
 			int right = min(left+2*step, length);
 			merge(array, temp, left ,middle, right);
 }		}
