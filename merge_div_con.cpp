@@ -38,6 +38,8 @@ void merge(int array[], int temp[], int left, int middle, int right)
 
 }
 
+
+//From top to down merge and sort
 void merge_sort_recursive(int array[], int temp[], int left, int right)
 {
     if(right - left <= 1)	//为空或者只有一个元素
@@ -50,7 +52,6 @@ void merge_sort_recursive(int array[], int temp[], int left, int right)
 }
 
 
-
 void merge_sort_recursive(int array[], int length)
 {
 	int *temp = new int[length];
@@ -59,7 +60,17 @@ void merge_sort_recursive(int array[], int length)
 }
 
 
-
+//from down to top 从头到尾 两个两个比较再合并
+void merge_sort_non_recursive(int array[], int length)
+{
+	int *temp = new int[length];
+	for(int step = 1; step < length; step = 2*step)
+		for(int left = 0; left < length; left = left + 2 * step)
+		{
+			int middle = min(left+step, length);
+			int right = min(left+2*step, length);
+			merge(array, temp, left ,middle, right);
+}		}
 
 
 int main()
