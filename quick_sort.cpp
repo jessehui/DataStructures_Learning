@@ -61,7 +61,7 @@ void quick_sort_wiki_method(int a[], int begin, int end)
 	swap(a[begin], a[pivot_index]);	
 
 	//然后对轴心两边分别递归
-	quick_sort_wiki_method(a, bgin, pivot_index - 1);
+	quick_sort_wiki_method(a, begin, pivot_index - 1);
 	quick_sort_wiki_method(a, pivot_index + 1, end);
 }
 
@@ -70,7 +70,9 @@ void quick_sort_wiki_method(int a[], int begin, int end)
 int main()
 {
     int a[] = {3,4,5,1,2,7,32,21,0,4};
-	quick_sort(a, 0, 9);	//end是length-1
+	//quick_sort(a, 0, 9);	//end是length-1
+    quick_sort_wiki_method(a, 0, 9);
+    
 	for(int i = 0;i < 10; i++)
 		cout << a[i] << "  ";
 	cout << endl;
