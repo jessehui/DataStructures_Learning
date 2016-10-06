@@ -19,6 +19,23 @@ int binary_search(int a[], int key, int begin, int end)
 		return middle;
 }
 
+//non recursive:
+int binary_search_iterative(int a[], int key, int begin, int end)
+{
+	while(begin < end)
+	{
+		int middle = (begin + end) / 2;
+		if( key > a[middle])
+			begin = middle+1;
+		else if( key < a[middle])
+			end = middle;
+		else 
+			return middle;
+
+	}
+	return -1;  // array is empty 
+}
+
 
 
 int main()

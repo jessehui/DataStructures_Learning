@@ -19,8 +19,8 @@ int main()
     unsigned int max = 0;
     unsigned int a;
     int i;
-//    scanf("%d", &num);  //get the number
-    num = 7141;
+    scanf("%d", &num);  //get the number
+    // num = 7141;
     sprintf(temp, "%d", num);   //convert int to char array
     int length = strlen(temp);
     printf("length = %d\n", length);
@@ -38,7 +38,14 @@ int main()
 
 char * duplicate(int index, char * array, int size)
 {
-    char tmp[size+1];
+    char *tmp = (char*)malloc(size+1);
+    //bug when use char* tmp[size+1];
+    //The local variables have a lifetime which
+    //extends only inside the block in which it is
+    //defined. The moment he control goes outside the
+    // block in which the local variable is defined, the
+    //storage for the variable is no more allocated (not guaranteed).
+    
     int i,j;
     for(i = 0;i <= index; i++)
         tmp[i] = array[i];      //copy the same number
@@ -48,14 +55,13 @@ char * duplicate(int index, char * array, int size)
     for(j = index + 1; j < size + 1; j++)
         tmp[j+1] = array[j];        //copy the rest
     
-    printf("tmp: ");
-    for(int i=0;i < size+1;i++)
-        printf("%c  ", tmp[i]);
-    printf("\n");
+    // printf("tmp: ");
+    // for(int i=0;i < size+1;i++)
+    //     printf("%c  ", tmp[i]);
+    // printf("\n");
     
     return tmp;
-        
+    
     
 }
-
 
