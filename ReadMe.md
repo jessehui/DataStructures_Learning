@@ -163,7 +163,27 @@ C++ 用new创建对象和直接定义的区别
 递归算法(recursive)会增加内存的使用. 
 
 ###二叉树
-tree: 一种新型的链表数据结构. 对于一个节点来说它只有0,1,2个子节点, 就是二叉树. 没有子节点的节点是叶子leaf节点
+tree: 一种新型的链表数据结构. 对于一个节点来说它只有0,1,2个子节点, 就是二叉树. 没有子节点的节点是叶子leaf节点.
+Binary search只能搜索排好序的, 对于没排好序的就要使用二叉搜索树Binary search tree(BST). 对于二叉搜索树的每个节点来说, 他的左边的子节点的数都要比他本身小.
+
+DFS: Deep first search 深度优先算法(沿一个方向一直向下走 走到头). 对于DFS的树的遍历算法有三种遍历方法: 前序 中序 后序.  
+前序: 到达一个节点, 打印value, 再遍历左子树, 再遍历右子树.   
+中序: 先遍历左子树, 然后打印value,然后遍历右子树. 可以作为排序算法.
+
+BFS breadth firs search: 逐层遍历
+
+### 栈和队列
+栈(stack): 新建只能从最上层, 删也只能从最上层删. 后进先出LIFO. 类似一个容器. 自己构造一个栈的话需要这些构造函数:   
+`init(), push(), pop(), top(), isempty(). `  
+因为栈太重要了, C++标准库有标准的实现方式. 但是我们也可以自己构造自己需要的栈结构.
+应用: 函数的调用.
+
+队列(queue): FIFO先进先出原则.
+
+
+
+
+
 
 ### malloc 和 new
 　　第一、malloc 函数返回的是 void * 类型，如果你写成：p = malloc (sizeof(int)); 则程序无法通过编译，报错：“不能将 void* 赋值给 int * 类型变量”。所以必须通过 (int *) 来将强制转换。  
@@ -204,6 +224,47 @@ new 返回指定类型的指针，并且可以自动计算所需要大小。比�
 　　p = (int *) malloc (sizeof(int));
 
 当无法知道内存具体位置的时候，想要绑定真正的内存空间，就需要用到动态的分配内存，即malloc函数。
+
+
+### template 和 typename
+typename什么地方使用: 用在模板定义里，标明其后的模板参数是类型参数. e.g.:  
+```C++
+template<typename  T, typename Y>
+T foo(const T& t, const Y& y){//....};
+
+templace<typename T>
+class CTest
+{
+private:
+ T t;
+public:
+ //...
+}
+```
+
+typename第二个应用: 模板中标明“内嵌依赖类型名”.
+
+### class构造函数冒号问题
+```C++
+class TEST
+{
+    public:
+
+    int b;
+
+    int c;
+
+    int a;
+
+   TEST(int x, int y):a(x),b(y),c(0){}
+   //相当于: 
+   TEST(int x, int y)
+   {
+    a = x; b = y; c =0;
+   }
+};
+```
+冒号的效果就是用括号内的值，来初始化成员变量值。与函数内部赋值相比，初始化列表的方式更高效。
 
 
 
