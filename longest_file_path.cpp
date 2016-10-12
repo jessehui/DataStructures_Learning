@@ -53,7 +53,7 @@ int main()
     
     for(int i = 0; i < file_system.length(); i++)
     {
-        //看需要多少个字符串来存放分解的路径
+        //get the number of paths we need
         if(file_system.substr(i,2) == "\\n")
             num_n ++;
     }
@@ -62,7 +62,7 @@ int main()
     printf("test\n");
 
     
-    //分解所有\n \t
+    //分解所有\n
     string *path = new string[num_n];
     printf("test2\n");
     int front_index = 0;
@@ -83,9 +83,9 @@ int main()
     }
     
     int length_max = 0;
-    int num_tab[num_path];
+    int num_space[num_path];
     for(int i =0;i<num_path;i++)
-        num_tab[i] = 0;
+        num_space[i] = 0;
     int length_temp[num_path];
     for(int i =0;i<num_path;i++)
         length_temp[i] = 0;
@@ -96,10 +96,10 @@ int main()
         for(int n =0;n< path[i].length();n++)
         {
             if(path[i].substr(n,2) == "\\t")
-                num_tab[i]++;
+                num_space[i]++;
             
         }
-        printf("num_tab[%d] = %d", i, num_tab[i]);
+        printf("num_tab[%d] = %d", i, num_space[i]);
     }
     
     
@@ -108,15 +108,15 @@ int main()
         
         if(path[i].find(".ext"))
         {
-            length_temp[i] += (path[i].length()-2*num_tab[i]);
+            length_temp[i] += (path[i].length()-num_space[i]);
             
             //向前边看 遍历前边的所有路径
             for(int k = i;k>=0;k--)
             {
-                if(num_tab[k] < num_tab[i])
-                    length_temp[i] += (path[k].length() - 2*num_tab[k]);
+                if(num_space[k] < num_space[i])
+                    length_temp[i] += (path[k].length() - num_space[k]);
                 
-                if(num_tab[k] == 0) //到达根目录 路径长度已经加过了
+                if(num_space[k] == 0) //到达根目录 路径长度已经加过了
                     break;
                 
             }
