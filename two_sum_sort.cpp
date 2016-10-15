@@ -29,10 +29,10 @@ void two_sum_sorted(int a[], int length, int target)	//复杂度O(n) 但是需�
 
 	while(left < right)
 	{
-		a[left] + a[right] = sum_;
+        sum_ = a[left] + a[right] ;
 		if( sum_ == target)
 		{
-			cout << "Result found: " << a[i] << "," << a[j] << endl;
+			cout << "Result found: " << a[left] << "," << a[right] << endl;
 			left++;right--;
 		}
 
@@ -45,10 +45,16 @@ void two_sum_sorted(int a[], int length, int target)	//复杂度O(n) 但是需�
 	}
 }
 
+void three_sum_sorted();
+
+
+
 int main()
 {
-	int a = {3, 4, 2, 1, 7, 5, 8, 9, 0, 6};
+	int a[] = {3, 4, 2, 1, 7, 5, 8, 9, 0, 6};
 	sort(a, a+10);	//std::sort
 	two_sum_sorted(a, 10, 9);
+    char *p = new char[100];
+    
 }
 

@@ -24,7 +24,7 @@ void pre_order(treenode *root)	//先序遍历 打印所有节点payload
 	{
 		cout << current_node->payload << " ";	//travel this node
 		if(current_node->right)		//先遍历左边, 再遍历右边. 但是因为到左边的leaf后, 很难重新再回到根节点
-			s.push(current_node->right);	//所以把根节点入栈
+			s.push(current_node->right);	//所以先把右节点入栈 为了遍历完左边后可以恢复现场遍历右边
 
 		if(current_node->left)
 			current_node = current_node->left;	//左边前进
@@ -39,6 +39,11 @@ void pre_order(treenode *root)	//先序遍历 打印所有节点payload
 		}
 
 	}
+}
+
+void level_order(treenode *root)	//use queue BFS
+{
+
 }
 
 

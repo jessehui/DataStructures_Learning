@@ -11,7 +11,7 @@ struct node{
 
 template <typename T>
 class stack{
-	node<T> *head;	//指向node<T>类型的指针
+	node<T> *head;	//指向node<T>类型的指针	只需要定义头 因为只从头部取数据
 
 
 
@@ -33,11 +33,11 @@ public:
 	void pop()	//出栈
 	{
 		if(empty())
-			throw "You can't pop an element from an empty stack.";
+			throw "You can't pop an element from an empty stack.";	//返回异常
 
 		node<T> *temp = head;
 		head = head->next;
-		delete temp;
+		delete temp;	//弹出的手动删除
 	}
 
 	T top()	//获得最上边的payload
