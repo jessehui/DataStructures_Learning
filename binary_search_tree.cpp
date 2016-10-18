@@ -43,7 +43,7 @@ void pre_order(treenode *root)	//先序遍历 打印所有节点payload
 
 void level_order(treenode *root)	//use queue BFS
 {
-
+	queue<treenode*> q(20); 
 }
 
 
