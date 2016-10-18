@@ -43,7 +43,23 @@ void pre_order(treenode *root)	//先序遍历 打印所有节点payload
 
 void level_order(treenode *root)	//use queue BFS
 {
-	queue<treenode*> q(20); 
+	queue<treenode*> q(20);	//储存<treenode *> 这种类型的queue q(20)
+	q.push(root);	//root入队列
+	while(!q.empty())
+	{
+		treenode* current_node = q.top();	//q.top()返回tail(出队列的位置)
+		p.pop();	//tail前移一位
+
+		cout << current_node -> payload << " ";
+		if(current_node -> left)
+		{
+			q.push(current_node -> left);
+		}
+		if(current_node -> right)
+		{
+			q.push(current_node -> right);
+		}
+	}
 }
 
 

@@ -3,7 +3,7 @@ class queue{
 	T* data;
 	int head, tail, size, data_length;	//从head加, 从tail取
 						//head tail起始位置是一样的
-
+						//不过head一直向后移, tail始终在开头的位置
 public:
 	queue(int length): head(0), tail(0), size(0), data_length(length)
 	{ data= new T[length]; }
