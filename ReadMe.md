@@ -319,7 +319,281 @@ void f(const int i) { i=10;//error! }
       //如果在函数体内修改了i，编译器就会报错
 ```
 
-3. 节省空间, 提高效率. const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝. 编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高  
+3. 节省空间, 提高效率. const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是象#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝. 编译器通常不为普通const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高
+
+
+### 使用数组存储二叉树
+完全二叉树: 若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在最左边，这就是完全二叉树。  
+除叶子节点外，每一层上的所有结点都有两个子结点（最后一层上的无子结点的结点为叶子结点）  
+平衡二叉树: 当且仅当两个子树的高度差不超过1时，这个树是平衡二叉树。（同时是排序二叉树）  
+
+只有完全二叉树才能放在数组中. 每层从左到右, 从浅到深放置. 这个时候如果要取子节点, 注意: 对于从0开始作为index的数组, 第i个元素的子节点分别为`2i+1`, `2i+2`(因为每一层的节点数都是上一层的2倍)
+
+堆(heap): 堆(heap)又被为优先队列(priority queue). 尽管名为优先队列，但堆并不是队列。在堆中，我们不是按照元素进入队列的先后顺序取出元素的，而是按照元素的优先级取出元素。
+堆的一个经典的实现是完全二叉树(complete binary tree)。这样实现的堆成为二叉堆(binary heap)。
+为了实现堆的操作，我们额外增加一个要求: 任意节点的优先级不小于它的子节点或者反过来都不大于.
+
+要插入新元素: 先放在数组最后, 然后看它符合的关系再调换位置.  
+要删除节点: 比如删除根节点, 就把最后的元素放在删除了的节点上, 然后按符合的关系调换位置直到满足要求. (拿取根节点可以看做是堆排序)
+
+
+### C++友元
+只有类的成员函数才能访问类的私有成员，程式中的其他函数是无法访问私有成员的。非成员函数能够访问类中的公有成员，但是假如将数据成员都定义 为公有的，这又破坏了隐藏的特性。另外，应该看到在某些情况下，特别是在对某些成员函数多次调用时，由于参数传递，类型检查和安全性检查等都需要时间开 销，而影响程式的运行效率。
+
+　　为了解决上述问题，提出一种使用友元的方案。友元是一种定义在类外部的普通函数，但他需要在类体内进行说 明，为了和该类的成员函数加以区别，在说明时前面加以关键字friend。友元不是成员函数，但是他能够访问类中的私有成员。友元的作用在于提高程式的运 行效率，但是，他破坏了类的封装性和隐藏性，使得非成员函数能够访问类的私有成员。
+
+　　友元能够是个函数，该函数被称为友元函数(friend function)；友元也能够是个类，该类被称为友元类。
+
+```C++
+class Point
+　　{
+　　public:
+　　　　Point(double xx, double yy) { x=xx; y=yy; }
+　　　　void Getxy();
+　　　　friend double Distance(Point &a, Point &b);
+　　private:
+　　　　double x, y;
+　　};
+
+　　void Point::Getxy()
+　　{
+　　cout<<"("<<<","<<<")"<< FONT>
+　　}
+
+　　double Distance(Point &a, Point &b)
+　　{
+　　double dx = a.x - b.x;
+　　double dy = a.y - b.y;
+　　return sqrt(dx*dx+dy*dy);
+　　}
+
+　　void main()
+　　{
+　　Point p1(3.0, 4.0), p2(6.0, 8.0);
+　　p1.Getxy();
+　　p2.Getxy();
+　　double d = Distance(p1, p2);
+　　cout<<"Distance is"<<< FONT>
+　　}```
+
+在该程式中的Point类中说明了一个友元函数Distance()，他在说明时前边加friend关键字，标识他不是成员函数，而是友元函数。 他的定义方法和普通函数定义相同，而不同于成员函数的定义，因为他无需指出所属的类。但是，他能够引用类中的私有成员，函数体中 a.x，b.x，a.y，b.y都是类的私有成员，他们是通过对象引用的。在调用友元函数时，也是同普通函数的调用相同，不要像成员函数那样调用。本例 中，p1.Getxy()和p2.Getxy()这是成员函数的调用，要用对象来表示。而Distance(p1, p2)是友元函数的调用，他直接调 用，无需对象表示，他的参数是对象。(该程式的功能是已知两点坐标，求出两点的距离。)
+
+
+
+### C++ class中的 public, private, protected
+类的一个特征就是封装，public和private作用就是实现这一目的。所以：
+用户代码（类外）可以访问public成员而不能访问private成员；private成员只能由类成员（类内）和友元访问。
+
+类的另一个特征就是继承，protected的作用就是实现这一目的。所以：
+protected成员可以被派生类对象访问，不能被用户代码（类外）访问。
+
+有public, protected, private三种继承方式，它们相应地改变了基类成员的访问属性。  
+1.public继承：基类public成员，protected成员，private成员的访问属性在派生类中分别变成：public, protected, private
+2.protected继承：基类public成员，protected成员，private成员的访问属性在派生类中分别变成：protected, protected, private
+3.private继承：基类public成员，protected成员，private成员的访问属性在派生类中分别变成：private, private, private
+但无论哪种继承方式，上面两点都没有改变：
+1.private成员只能被本类成员（类内）和友元访问，不能被派生类访问；
+2.protected成员可以被派生类访问。
+
+
+```C++
+#include<iostream>
+#include<assert.h>
+using namespace std;
+
+class A{
+public:
+  int a;
+  A(){
+    a1 = 1;
+    a2 = 2;
+    a3 = 3;
+    a = 4;
+  }
+  void fun(){
+    cout << a << endl;    //正确
+    cout << a1 << endl;   //正确
+    cout << a2 << endl;   //正确
+    cout << a3 << endl;   //正确
+  }
+public:
+  int a1;
+protected:
+  int a2;
+private:
+  int a3;
+};
+
+//public 继承
+class B : public A{
+public:
+  int a;
+  B(int i){
+    A();
+    a = i;
+  }
+  void fun(){
+    cout << a << endl;       //正确，public成员
+    cout << a1 << endl;       //正确，基类的public成员，在派生类中仍是public成员。
+    cout << a2 << endl;       //正确，基类的protected成员，在派生类中仍是protected可以被派生类访问。
+    cout << a3 << endl;       //错误，基类的private成员不能被派生类访问。
+  }
+};
+int main(){
+  B b(10);
+  cout << b.a << endl;
+  cout << b.a1 << endl;   //正确
+  cout << b.a2 << endl;   //错误，类外不能访问protected成员
+  cout << b.a3 << endl;   //错误，类外不能访问private成员
+  system("pause");
+  return 0;
+}
+
+//protected 继承
+class B : protected A{
+public:
+  int a;
+  B(int i){
+    A();
+    a = i;
+  }
+  void fun(){
+    cout << a << endl;       //正确，public成员。
+    cout << a1 << endl;       //正确，基类的public成员，在派生类中变成了protected，可以被派生类访问。
+    cout << a2 << endl;       //正确，基类的protected成员，在派生类中还是protected，可以被派生类访问。
+    cout << a3 << endl;       //错误，基类的private成员不能被派生类访问。
+  }
+};
+int main(){
+  B b(10);
+  cout << b.a << endl;       //正确。public成员
+  cout << b.a1 << endl;      //错误，protected成员不能在类外访问。
+  cout << b.a2 << endl;      //错误，protected成员不能在类外访问。
+  cout << b.a3 << endl;      //错误，private成员不能在类外访问。
+  system("pause");
+  return 0;
+}
+
+
+
+
+//private 继承
+class B : private A{
+public:
+  int a;
+  B(int i){
+    A();
+    a = i;
+  }
+  void fun(){
+    cout << a << endl;       //正确，public成员。
+    cout << a1 << endl;       //正确，基类public成员,在派生类中变成了private,可以被派生类访问。
+    cout << a2 << endl;       //正确，基类的protected成员，在派生类中变成了private,可以被派生类访问。
+    cout << a3 << endl;       //错误，基类的private成员不能被派生类访问。
+  }
+};
+int main(){
+  B b(10);
+  cout << b.a << endl;       //正确。public成员
+  cout << b.a1 << endl;      //错误，private成员不能在类外访问。
+  cout << b.a2 << endl;      //错误, private成员不能在类外访问。
+  cout << b.a3 << endl;      //错误，private成员不能在类外访问。
+  system("pause");
+  return 0;
+}
+
+```
+
+
+### C++的一些名词
+面向对象的三大特征：
+1.封装(Encapsulation)：保证对象自身数据的完整性、安全性
+2.继承(inheritance)：建立类之间的关系，实现代码复用、方便系统的扩展
+3.多态(polymorphism)：相同的方法调用可实现不同的实现方式。多态是指两个或多个属于不同类的对象，对于同一个消息（方法调用）作出不同响应的方式。多态性可以简单地概括为“一个接口，多种方法”，程序在运行时才决定调用的函数，它是面向对象编程领域的核心概念。多态(polymorphism)，字面意思多种形状。
+C++支持两种多态性：编译时多态性，运行时多态性。
+
+a. 编译时多态性：通过重载函数实现
+
+b. 运行时多态性：通过虚函数实现。
+
+### 虚函数
+同一类中是不能定义两个名字相同、参数个数和类型都相同的函数的，否则就是“重复定义”。但是在类的继承层次结构中，在不同的层次中可以出现名字相同、参数个数和类型都相同而功能不同的函数。  
+人们提出这样的设想，能否用同一个调用形式，既能调用派生类又能调用基类的同名函数。在程序中不是通过不同的对象名去调用不同派生层次中的同名函数，而是通过__指针__调用它们。  
+例如，用同一个语句“pt->display( );”可以调用不同派生层次中的display函数，只需在调用前给指针变量 pt 赋以不同的值(使之指向不同的类对象)即可。  
+C++中的虚函数就是用来解决这个问题的。虚函数的作用是允许在派生类中重新定义与基类同名的函数，并且可以通过基类指针或引用来访问基类和派生类中的同名函数。
+
+
+虚函数为了重载和多态的需要，在基类中是有定义的，即便定义是空. 所以子类中可以重写也可以不写基类中的函数！
+
+纯虚函数在基类中是没有定义的，必须在子类中加以实现. 引入原因：为了方便使用多态特性，我们常常需要在基类中定义虚函数。  
+Example: 
+```C++
+class Cman
+
+{
+
+public:
+
+virtual void Eat(){……};
+
+void Move();
+
+private:
+
+};
+
+class CChild : public CMan
+
+{
+
+public:
+
+virtual void Eat(){……};
+
+private:
+
+};
+
+CMan m_man;
+
+CChild m_child;
+
+
+//这才是使用的精髓，如果不定义基类的指针去使用，没有太大的意义
+
+CMan *p ;
+
+p = &m_man ;
+
+p->Eat(); //始终调用CMan的Eat成员函数，不会调用 CChild 的
+
+p = &m_child;
+
+p->Eat(); //如果子类实现(覆盖)了该方法，则始终调用CChild的Eat函数
+
+//不会调用CMan 的 Eat 方法；如果子类没有实现该函数，则调用CMan的Eat函数
+
+p->Move(); //子类中没有该成员函数，所以调用的是基类中的
+```
+
+基类的析构函数都为虚函数. 
+
+
+### vector
+```C++
+vector<int> vec;
+vec.push_back(1);  
+```
+push_back在vector结尾插入一个新的元素. vector是用数组实现的，每次执行push_back操作，相当于底层的数组实现要重新分配大小（即先free掉原存储，后重新malloc）；这种实现体现到vector实现就是每当push_back一个元素,都要重新分配一个大一个元素的存储，然后将原来的元素拷贝到新的存储，之后在拷贝push_back的元素，最后要析构原有的vector并释放原有的内存。
+
+vec.back();      // 传回最后一个数据，不检查这个数据是否存在。
+vec.end();       // 指向迭代器中末端元素的下一个，指向一个不存在元素。
+vec.pop_back();  //删除最后一个数据, 并减少容器尺寸
+
+
+
+
+
 
 
 
