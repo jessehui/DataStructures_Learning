@@ -9,10 +9,10 @@ class binary_heap{
 	vector<T> data;
 
 protected: //protected成员可以被派生类对象访问，不能被用户代码（类外）访问。
-	virtual bool compare(T a, T b) = 0;	//纯虚函数
+	virtual bool compare(T a, T b) = 0;	//纯虚函数	必须使用重载函数
 
 public:
-	void insert(T value)
+	void insert(T value)//插入元素 并按照堆的规则排列
 	{
 		data.push_back(value);	//在末尾插入一个元素
 		int pos = data.size() - 1;	//最后一个index
@@ -37,7 +37,7 @@ public:
 	void delete_root()
 	{
 		data[0] = data.back();	//传回最后一个元素
-		data.pop_back(); 	//删除最后一个元素
+		data.pop_back(); 	//删除最后一个元素 vector的方法 
 		heapify(0);		//堆重排
 		return;
 
