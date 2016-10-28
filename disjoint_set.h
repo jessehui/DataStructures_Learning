@@ -1,3 +1,4 @@
+//并查集数据结构的实现.
 //struct的构造函数要写返回类型.
 
 struct disjoint_set{
