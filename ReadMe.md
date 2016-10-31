@@ -659,8 +659,11 @@ int main()
 
 它可以很方便的序列化和反序列话，比如，直接拿到一个struct 的指针。 sizeof取得大小，直接把对象存储到文件或写入网络。当然基于某些原因。我也不建议这么做。
 
-
- 
+###
+shell文件反选例子: 
+```shell
+git add `ls |grep -v "kruskal.cpp"`
+```
 
 
 
