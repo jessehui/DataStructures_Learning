@@ -691,8 +691,35 @@ bool compare_weight(edge a, edge b)
 ### 单源最短路径算法
 出发点固定 从出发点到任意一点的距离固定. Dijkastra算法.
 
+###C++ operator关键字
+```C++ 
+class test1
+{
+public: 
+        void operator()(int x)
+        {
+                cout<<x<<endl;
+        }
+};
 
+void test2(int x)
+{
+        cout<<x<<endl;
+}
 
+int main()
+{
+        f(test1());
+        f(test2);
+}
+```
+所以operator()就是重载操作符. 
+
+###priority_queue
+优先队列是计算机科学中的一类抽象数据类型。优先队列中的每个元素都有各自的优先级，优先级最高的元素最先得到服务；优先级相同的元素按照其在优先队列中的顺序得到服务。优先队列往往用堆来实现。
+优先队列是队列的一种，不过它可以按照自定义的一种方式（数据的优先级）来对队列中的数据进行动态的排序每次的push和pop操作，队列都会动态的调整，以达到我们预期的方式来存储。例如：我们常用的操作就是对数据排序，优先队列默认的是数据大的优先级高所以我们无论按照什么顺序push一堆数，最终在队列里总是top出最大的元素。  
+`priority_queue<int, vector<int>, greater<int> >pq; `  
+第二个参数为容器类型。 第三个参数为比较函数.
 
 
 
