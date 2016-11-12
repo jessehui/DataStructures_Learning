@@ -689,7 +689,7 @@ bool compare_weight(edge a, edge b)
 ```
 
 ### 单源最短路径算法
-
+出发点固定 从出发点到任意一点的距离固定. Dijkastra算法.
 
 
 
