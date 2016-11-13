@@ -55,6 +55,7 @@ vecotr<node> dijkstra(graph_ad_list &g, int source)	//从source开始的最短�
 		for(auto edge_pos = edge_nodes.begin(); 
 			edge_pos != edge_nodes.end(); edge_pos++)
 		{
+			//找边的目标节点
 			node& dest_node = nodes[edge_pos -> dest_id];
 			if(current_node.dist + edge_pos->weight < dest_node.dist)
 			{
@@ -68,6 +69,16 @@ vecotr<node> dijkstra(graph_ad_list &g, int source)	//从source开始的最短�
 
 	}
 	return nodes;	//所有节点都processed且piority_queue为空的时候返回
+}
+
+void print_path(vecotr<node>& nodes, int node_id)
+{
+	if(nodes[node_id].prev == -1)	//reach the source
+		cout << "Path: " << node_id;
+	else{
+		print_path(nodes,nodes[node_id].prev);
+		cout << "->" << node_id;
+	}
 }
 
 int main()
