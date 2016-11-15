@@ -742,8 +742,52 @@ int main()
 哈希表hash table(key，value) 的做法其实很简单，就是把Key通过一个固定的算法函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位.
 Hash，一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的输入（又叫做预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间.不同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
 HASH主要用于信息安全领域中加密算法，它把一些不同长度的信息转化成杂乱的128位的编码,这些编码叫做HASH值. 也可以说，hash就是找到一种数据内容和数据存放地址之间的映射关系。
+数组的特点是：寻址容易，插入和删除困难；而链表的特点是：寻址困难，插入和删除容易。那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？答案是肯定的，这就是哈希表，哈希表有多种不同的实现方法，最常用的一种方法——拉链法，我们可以理解为“链表的数组”
 
 
+### 寻路算法
+1. Lee's algorithm:   
+1) Initialization
 
+ - Select start point, mark with 0
+ - i := 0
+
+2) Wave expansion
+
+ - REPEAT
+     - Mark all unlabeled neighbors of points marked with i with i+1
+     - i := i+1
+   UNTIL ((target reached) or (no points can be marked))
+
+3) Backtrace
+
+   - go to the target point
+   REPEAT
+     - go to next node that has a lower mark than the current node
+     - add this node to path
+   UNTIL (start point reached)
+
+4) Clearance
+
+ - Block the path for future wirings
+ - Delete all marks
+
+
+2. A* algorithm
+video tutorial: [https://www.youtube.com/watch?v=KNXfSOx4eEE]  
+tutorial: [http://www.cnblogs.com/yanlingyin/archive/2012/01/15/2322640.html]
+
+算法演示及与Lee's Algorithm 的比较: [https://www.youtube.com/watch?v=QWLIWr9V7dQ]
+
+### 关于计算机算法中的Heuristic方法
+Heuristic 启发式方法（试探法）是一种帮你寻求答案的技术，但它给出的答案是具有偶然性的（subject to chance），因为启发式方法仅仅告诉你该如何去找，而没有告诉你要找什么。它并不告诉你该如何直接从A 点到达B 点，它甚至可能连A点和B点在哪里都不知道。实际上，启发式方法是穿着小丑儿外套的算法：它的结果不太好预测，也更有趣，但不会给你什么30 天无效退款的保证。   
+
+驾驶汽车到达某人的家，写成算法是这样的：沿167 号高速公路往南行至Puyallup；从South Hill Mall 出口出来后往山上开4.5 英里；在一个杂物店旁边的红绿灯路口右转，接着在第一个路口左转；从左边褐色大房子的车道进去，就是North Cedar 路714 号。
+
+用启发式方法来描述则可能是这样：找出上一次我们寄给你的信，照着信上面的寄出地址开车到这个镇；到了之后你问一下我们的房子在哪里。这里每个人都认识我们——肯定有人会很愿意帮助你的；如果你找不到人，那就找个公共电话亭给我们打电话，我们会出来接你。
+
+算法和启发式方法之间的差别很微妙，两个术语的意思也有一些重叠。就本书的目的而言，它们之间的差别就在于其距离最终解决办法的间接程度：算法直接给你解决问题的指导，而启发式方法则告诉你该如何发现这些指导信息，或者至少到哪里去寻找它们。
+
+启发式算法的优点在于它比盲目型的搜索法要高效，一个经过仔细设计的启发函数，往往在很快的时间内就可得到一个搜索问题的最优解，对于NP问题，亦可在多项式时间内得到一个较优解。
 
 
