@@ -741,8 +741,54 @@ int main()
 哈希表（Hash table，也叫散列表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
 哈希表hash table(key，value) 的做法其实很简单，就是把Key通过一个固定的算法函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位.
 Hash，一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的输入（又叫做预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间.不同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
-HASH主要用于信息安全领域中加密算法，它把一些不同长度的信息转化成杂乱的128位的编码,这些编码叫做HASH值. 也可以说，hash就是找到一种数据内容和数据存放地址之间的映射关系。
+HASH主要用于信息安全领域中加密算法，它把一些不同长度的信息转化成杂乱的128位的编码,这些编码叫做HASH值. 也可以说，hash就是找到一种数据内容和数据存放地址之间的映射关系。(MD5校验)
 数组的特点是：寻址容易，插入和删除困难；而链表的特点是：寻址困难，插入和删除容易。那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？答案是肯定的，这就是哈希表，哈希表有多种不同的实现方法，最常用的一种方法——拉链法，我们可以理解为“链表的数组”
+
+set和map: set是一个集合, map是key和value的有序对(通过key查找时间复杂度为O(1),通过value查找时间复杂度是O(n))
+
+
+### C++ 模板库unordered_set
+C++ 11中出现了两种新的关联容器:unordered_set和unordered_map，其内部实现与set和map大有不同，set和map内部实现是基于RB-Tree(红黑树)，而unordered_set和unordered_map内部实现是基于哈希表(hashtable).
+通过前面说的哈希函数，会发现其都位于数组的相同位置，这里，就涉及到“冲突”。准确来说，冲突是不可避免的，而解决冲突的方法常见的有：开发地址法、再散列法、链地址法(也称拉链法)。而unordered_set内部解决冲突采用的是----链地址法，当用冲突发生时把具有同一关键码的数据组成一个链表。
+
+
+### const 
+对于非内部数据类型的参数而言，象voidFunc(A a) 这样声明的函数注定效率比较底。因为函数体内将产生A类型的临时对象用于复制参数a，而临时对象的构造、复制、析构过程都将消耗时间。
+为了提高效率，可以将函数声明改为voidFunc(A &a)，因为“引用传递”仅借用一下参数的别名而已，不需要产生临时对象。但是函数voidFunc(A &a) 存在一个缺点：  
+“引用传递”有可能改变参数a，这是我们不期望的。解决这个问题很容易，加const修饰即可，因此函数最终成为voidFunc(const A &a)。
+
+The addition of an ‘&’ to the parameter name in C++ (which was a very confusing choice of symbol because an ‘&’ in front of variables elsewhere in C generates pointers!) causes the actual variable itself, rather than a copy, to be used as the parameter in the subroutine and therefore can be written to thereby passing data back out the subroutine. Therefore  
+```C++
+void Subroutine3(int &Parameter1) 
+{ Parameter1=96;}
+```  
+would set the variable it was called with to 96. This method of passing a variable as itself rather than a copy is called a ‘reference’ in C++.
+
+>const 成员函数
+
+任何不会修改数据成员的函数都应该声明为const类型。如果在编写const成员函数时，不慎修改了数据成员，或者调用了其它非const成员函数，编译器将指出错误，这无疑会提高程序的健壮性。以下程序中，类stack的成员函数GetCount仅用于计数，从逻辑上讲GetCount应当为const函数。编译器将指出GetCount函数中的错误。
+```C++ 
+class Stack
+{
+public:
+  void Push(int elem);
+  int Pop(void);
+  intGetCount(void) const; // const 成员函数
+private:
+  intm_num;
+  int m_data[100];
+};
+
+int Stack::GetCount(void)const
+{
+  ++ m_num; // 编译错误，企图修改数据成员m_num
+  Pop();// 编译错误，企图调用非const函数
+  returnm_num;
+}
+```
+
+### 红黑树
+
 
 
 ### 寻路算法
@@ -789,5 +835,10 @@ Heuristic 启发式方法（试探法）是一种帮你寻求答案的技术，�
 算法和启发式方法之间的差别很微妙，两个术语的意思也有一些重叠。就本书的目的而言，它们之间的差别就在于其距离最终解决办法的间接程度：算法直接给你解决问题的指导，而启发式方法则告诉你该如何发现这些指导信息，或者至少到哪里去寻找它们。
 
 启发式算法的优点在于它比盲目型的搜索法要高效，一个经过仔细设计的启发函数，往往在很快的时间内就可得到一个搜索问题的最优解，对于NP问题，亦可在多项式时间内得到一个较优解。
+
+
+### 强联通子图
+从任一点出发可以到达任意一点. 无环.  
+可以用来控制模块文件之间的依赖关系. 
 
 
