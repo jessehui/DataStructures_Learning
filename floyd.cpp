@@ -11,10 +11,11 @@
 using namespace std;
 
 //&表示在函数中对参数的改变会影响到函数外
-void print_path(vector<vector <int>> &next, int i, int j)
+//形参可以是任何名字, 并不一定要和主函数中定义的变量同名
+void print_path(vector<vector <int>> &next_test, int i, int j)
 {
 	cout << "Printing path from " << i << " to " << j << " : ";
-	if(next[i][j] == -1)
+	if(next_test[i][j] == -1)
 	{
 		cout << "no path found" << endl;
 		return;
@@ -22,7 +23,7 @@ void print_path(vector<vector <int>> &next, int i, int j)
 	cout << i;
 	while(i != j)
 	{
-		i = next[i][j];
+		i = next_test[i][j];
 		cout << "->" << i;
 	}
 	cout << endl;
