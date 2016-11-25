@@ -10,7 +10,23 @@
 
 using namespace std;
 
-void print_path()
+//&表示在函数中对参数的改变会影响到函数外
+void print_path(vector<vector <int>> &next, int i, int j)
+{
+	cout << "Printing path from " << i << " to " << j << " : ";
+	if(next[i][j] == -1)
+	{
+		cout << "no path found" << endl;
+		return;
+	}
+	cout << i;
+	while(i != j)
+	{
+		i = next[i][j];
+		cout << "->" << i;
+	}
+	cout << endl;
+}
 
 int main()
 {
@@ -24,6 +40,8 @@ int main()
 
 	//用0,1,2,3表示4个节点, -1表示无同路或者是自身
 	//二维表示从a_node到b_node
+	//next[i][j]: 从i到j, 如果有通路(比如i->a->c->j), 那么表示从i出发的下一个节点(a)
+	//如果不经过别的节点, 那么就是j. 如果没有同路,那就是-1
 	vector<vector<int>> next {
 		{-1, -1, 2, -1},
 		{0, -1, 2, -1},
@@ -41,6 +59,18 @@ int main()
 					next[i][j] = next[i][k];//为了最短路, 本来i下一个是j的, 现在替换成k了
 				}
 			}
+
+
+	//打印所有点之间的距离
+	for(int i = 0; i < d.size(); i++, cout << endl)
+		for(int j = 0;j< d.size();j++)
+			cout << d[i][j] << " ";
+
+	for(int i = 0; i < d.size(); i++, cout << endl)
+		for(int j = 0;j< d.size();j++)
+			print_path(next, i, j);
+
+	return 0;
 
 }
 
