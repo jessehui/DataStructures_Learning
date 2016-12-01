@@ -18,7 +18,7 @@
 #include <string>
 
 //如果不需要打印 就注释掉此行
-//#define DEBUG_ME
+#define DEBUG_ME
 
 using namespace std;
 
@@ -35,10 +35,18 @@ string convert(string s, int numRows)
     
     
     
-    while(i<=s.size())
+    while(i<=s.size() && n <= s.size())
     {
+        if(s[n] == NULL)
+        {
+            cout << "n:" << n;
+            n = row + 1;
+            row++;
+            continue;
+        }
         if(numRows%2 == 1 && row == numRows/2)	//写成奇数行时 中间那行
         {
+            
             result[i] = s[n];
             n = n + (numRows+1)/2;
             if(n>s.size())
@@ -82,11 +90,12 @@ string convert(string s, int numRows)
 #ifdef DEBUG_ME
         cout << " i = " << i << endl;
         cout << result[i] << endl;
-        
-        cout << result <<endl;
 #endif
         result = result+result[i];  //???为什么result[i]有值, 而result为空?
         i++;
+#ifdef DEBUG_ME
+        cout << result <<endl;
+#endif
         
     }
     
@@ -102,7 +111,8 @@ string convert(string s, int numRows)
 int main ()
 {
     string source = "AB";
-    string output = convert(source,2);
+    string output = convert(source,1);
+    //cout << "source[2] = " << source[24];
     cout << "after convert:" << output << endl;
    // output.~string();
     return 0;
