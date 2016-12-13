@@ -49,3 +49,9 @@ find用法:
 
 ### 6 Zigzag Conversion
 string: 
+
+
+### hash_set (unordered_set)
+while(hash_set.count(s[i]))//有重复的元素 
+count只返回1或者0
+
