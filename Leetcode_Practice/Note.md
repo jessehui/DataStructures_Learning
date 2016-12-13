@@ -32,9 +32,20 @@ bool compare(int a, int b)
         std::cout << *iter << endl;
     }
 ```
+:: 表示调用成员 .表示调用函数
 
 除了iterator, 每种容器还定义了const_iterator. 只能用于读取容器内元素, 不能通过解引用改变元素的值. 
 
+vector初始化:
+```C++
+        vector<int> a ;                                //声明一个int型向量a
+        vector<int> a(10) ;                            //声明一个初始大小为10的向量
+        vector<int> a(10, 1) ;                         //声明一个初始大小为10且初始值都为1的向量
+        vector<int> b(a) ;                             //声明并用向量a初始化向量b
+        vector<int> b(a.begin(), a.begin()+3) ;        //将a向量中从第0个到第2个(共3个)作为向量b的初始值
+```
+find用法:  
+`if(find(result.begin(),result.end(), s[i]) != result.end())//重复了`
 
 ### 6 Zigzag Conversion
 string: 
