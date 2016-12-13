@@ -64,3 +64,51 @@ public:
 };
 
 //
+class Solution {
+public:
+int lengthOfLongestSubstring(string s)
+{
+    vector<char> result;
+    unordered_set<char> hash_set;
+    int length=0;
+    int max = 0;
+    
+    for(int i = 0; i < s.size(); i++)
+    {
+        
+        if(hash_set.count(s[i]) == 0)
+        {
+            result.push_back(s[i]);
+            hash_set.insert(s[i]);
+            length = result.size();
+         //   cout <<" length = " << length << endl;
+        }
+        
+        else
+        {
+            
+            while(hash_set.count(s[i]) == 1)//有重复的元素
+            {
+                hash_set.erase(*result.begin());
+                result.erase(result.begin()); //除去第一个元素
+                
+                // cout << "删除完后 此时result size = " << result.size();
+                // cout << "删除完后 此时result begin = " << *result.begin();
+                // cout << " s[i] = " << s[i] ;
+                // cout << "hash_set.count(s[i]) = " << hash_set.count(s[i]) << endl;
+            }
+            
+            result.push_back(s[i]);
+            hash_set.insert(s[i]);
+            
+        }
+        
+        if(max < length)
+            max = length;
+        
+    }
+    
+    return max;
+    
+}
+};
