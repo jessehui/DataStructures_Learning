@@ -55,3 +55,7 @@ string:
 while(hash_set.count(s[i]))//有重复的元素 
 count只返回1或者0
 
+
+### 找两个有序数组的中位数
+[http://bookshadow.com/weblog/2015/02/05/find-kth-smallest-element-in-the-union-of-two-sorted-arrays/]  
+

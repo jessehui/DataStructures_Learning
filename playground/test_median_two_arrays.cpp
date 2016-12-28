@@ -119,6 +119,36 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 //    
 //}
 
+
+//return : true: 只求最中间的一个元素; false: 求最中间的两个元素
+bool median_num(vector<int> nums1, vector<int> nums2)
+{
+    if( (nums1.size()+nums2.size())%2 == 1) //共奇数个元素, 只要求最中间的即可
+        return true;
+    else
+        return false;
+}
+
+int find_median(vector<int>& nums1, vector<int>& nums2)
+{
+    
+    double median_1, median_2;
+    int size1 = nums1.size();
+    int size2 = nums2.size();
+    
+    int median_num; //median对应的标号
+    int median_glb;
+    
+    if((size1+size2)%2 == 1)
+    {
+        median_num = (size1+size2)/2+1;
+        
+        
+        
+        
+    }
+)
+
 int main()
 {
     vector<int> nums2 = {1,2,3};
