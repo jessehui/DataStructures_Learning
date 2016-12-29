@@ -32,74 +32,160 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 
-string find_longest_substring(string a, string b)
+//string find_longest_substring(string a, string b)
+//{
+//    for()
+//}
+
+//string longestPalindrome(string s)
+//    {
+//        string s_prime = s;
+//        reverse(s_prime.begin(),s_prime.end());
+//        cout << "after reverse :";
+//        for(string::iterator it = s_prime.begin();it != s_prime.end(); ++it)
+//            cout << *it << " ";
+//        cout << endl;
+//        vector<char> temp;
+//        //int num = 0;
+//        
+//        //find the common string
+//        for(string::iterator it_s = s.begin(); it_s != s.end(); ++it_s)
+//            for(string::iterator it_sp = s_prime.begin(); it_sp != s_prime.end(); ++it_sp)
+//            {
+//                while(*it_s == *it_sp)
+//                {
+//                    temp.push_back(*it_s);
+//                    ++it_s; ++it_sp;
+//                    if(it_s == s.end() || it_sp == s_prime.end())
+//                    {
+//                        cout << "end" << endl;
+//                        break;
+//                    }
+//                    cout << "it_s :" << *it_s << " ;    it_sp: " << *it_sp <<endl;
+//                }
+//                
+//                if(temp.size() == 1)	//就只有一个, 就丢弃
+//                    temp.erase(temp.begin(),temp.end());
+//                
+//                
+//            }
+//        
+//        
+//        if(temp.size() <= 1)
+//            return NULL;
+//        
+//        else	//检查是否是回文序列
+//        {
+//            for(int i = 0; i < temp.size()/2; i++)
+//                if(temp[i] == temp[temp.size()-1-i])
+//                    continue;
+//                else
+//                    return NULL;
+//            
+//            
+//            
+//        }
+//        string return_ = string(temp.begin(),temp.end());
+//        return return_;
+//        
+//        
+//}
+
+//return 回文次数
+int expand_center(string s, int i, int& flag)
 {
-    for()
+    int num = 0;
+    int same_num = 1;
+//    if(s[i] == s[i+1] && s[i-1] == s[i+1])
+//        goto one_;
+    int temp = i;
+//    char middle = s[i]
+//    if(s[i] == s[i+1])
+//    {
+//        while(s[i]==s[i+1])
+//        {
+//            same_num++;
+//            i++;
+//        }
+//        cout << "same num = " << same_num << endl;
+//    }
+//    
+//    i = temp;
+    if(s[i] == s[i+1] )//中间两个一样
+    {
+        num++;
+        flag = 1;
+        for(int j = 1; j < s.length()-1; j++)
+        {
+            if( (i-j>=0) && (i+j+1<s.length()) && (s[i-j] == s[i+1+j]))
+                num++;
+            else break;
+        }
+        cout << " 中间两个 num = " << num << endl;
+        return num; //(num)*2
+    }
+    
+    else    //中间一个分开 两边一样
+    {
+/*one_:*/
+        flag = 0;
+        for(int k = 1; k < s.length()-1; k++)
+        {
+            if( (i-k>=0) && (i+k < s.length()) && (s[i-k] == s[i+k]) )
+                num++;
+            else break;
+            
+        }
+        cout << "中间一个 num = " << num << endl;
+        return num; //2*num+1
+    }
 }
 
 string longestPalindrome(string s)
+{
+    int length = 0;
+    int max_ = 0;
+    int index = 0;
+    int flag = 0;   //判定回文类型 中间是两个还是一个
+    int final_flag = 0;
+    
+    if(s.length() == 1)
+        return s;
+    
+    for(int i = 0; i < s.length()-1;i++)
     {
-        string s_prime = s;
-        reverse(s_prime.begin(),s_prime.end());
-        cout << "after reverse :";
-        for(string::iterator it = s_prime.begin();it != s_prime.end(); ++it)
-            cout << *it << " ";
-        cout << endl;
-        vector<char> temp;
-        //int num = 0;
-        
-        //find the common string
-        for(string::iterator it_s = s.begin(); it_s != s.end(); ++it_s)
-            for(string::iterator it_sp = s_prime.begin(); it_sp != s_prime.end(); ++it_sp)
-            {
-                while(*it_s == *it_sp)
-                {
-                    temp.push_back(*it_s);
-                    ++it_s; ++it_sp;
-                    if(it_s == s.end() || it_sp == s_prime.end())
-                    {
-                        cout << "end" << endl;
-                        break;
-                    }
-                    cout << "it_s :" << *it_s << " ;    it_sp: " << *it_sp <<endl;
-                }
-                
-                if(temp.size() == 1)	//就只有一个, 就丢弃
-                    temp.erase(temp.begin(),temp.end());
-                
-                
-            }
-        
-        
-        if(temp.size() <= 1)
-            return NULL;
-        
-        else	//检查是否是回文序列
+        length = expand_center(s,i,flag);
+        if(length >= max_)
         {
-            for(int i = 0; i < temp.size()/2; i++)
-                if(temp[i] == temp[temp.size()-1-i])
-                    continue;
-                else
-                    return NULL;
-            
-            
-            
+            max_ = length;
+            index = i;
+            final_flag = flag;
         }
-        string return_ = string(temp.begin(),temp.end());
-        return return_;
-        
-        
+        cout << "i = " << i << "  ";
+        cout << "index = " << index << "   ; max_ =  " << max_ <<"  ;final flag = " << final_flag << endl;
+    }
+    
+    if(final_flag == 1)
+        return s.substr(index+1-max_,max_*2);
+    else
+        return s.substr(index-max_, max_*2+1);
+    
 }
+
+
+
+
 
 
 int main()
 {
-    string s = "abbcdcb";
+    string s = "aaaaa";
     string longest = longestPalindrome(s);
-    cout << "final answer: " << s << endl;
+    cout << "final answer: " << longest << endl;
     return 0;
 }
