@@ -112,11 +112,46 @@ f(n) = n2
 
 整个算法的时间复杂度为Ο(n+n2) = Ο(n2)。
 
+### string 用法
+```C++ 
+//查找
+str.find("ab");//返回字符串 ab 在 str 的位置
+str.find("ab", 2);//在 str[2]~str[n-1] 范围内查找并返回字符串 ab 在 str 的位置
+str.rfind("ab", 2);//在 str[0]~str[2] 范围内查找并返回字符串 ab 在 str 的位置
+
+
+//子串
+str.substr(3); //返回 [3] 及以后的子串
+str.substr(2, 4); //返回 str[2]~str[2+(4-1)] 子串(即从[2]开始4个字符组成的字符串)
+
+
+//插入
+str.insert(2, "sz");//从 [2] 位置开始添加字符串 "sz"，并返回形成的新字符串
+str.insert(2, "abcd", 3);//从 [2] 位置开始添加字符串 "abcd" 的前 3 个字符，并返回形成的新字符串
+str.insert(2, "abcd", 1, 3);//从 [2] 位置开始添加字符串 "abcd" 的前 [2]~[2+(3-1)] 个字符，并返回形成的新字符串
+
+//追加
+//除了用重载的 + 操作符，还可以使用函数来完成。
+str.push_back('a');//在 str 末尾添加字符'a'
+str.append("abc");//在 str 末尾添加字符串"abc"
+
+//删除
+str.erase(3);//删除 [3] 及以后的字符，并返回新字符串
+str.erase(3, 5);//删除从 [3] 开始的 5 个字符，并返回新字符串
+
+//交换
+str1.swap(str2);//把 str1 与 str2 交换
+```
 
 
 
 
 
 
+### vector<char> 转string
+```c++
+vector<char> temp;
+string return_ = string(temp.begin(),temp.end());
+```
 
 
