@@ -96,87 +96,134 @@ using namespace std;
 //        
 //}
 
-//return 回文次数
-int expand_center(string s, int i, int& flag)
-{
-    int num = 0;
-    int same_num = 1;
-//    if(s[i] == s[i+1] && s[i-1] == s[i+1])
-//        goto one_;
-    int temp = i;
-//    char middle = s[i]
-//    if(s[i] == s[i+1])
+////return 回文次数
+//int expand_center(string s, int i, int& flag)
+//{
+//    int num = 0;
+//    int same_num = 1;
+////    if(s[i] == s[i+1] && s[i-1] == s[i+1])
+////        goto one_;
+//    int temp = i;
+////    char middle = s[i]
+////    if(s[i] == s[i+1])
+////    {
+////        while(s[i]==s[i+1])
+////        {
+////            same_num++;
+////            i++;
+////        }
+////        cout << "same num = " << same_num << endl;
+////    }
+////    
+////    i = temp;
+//    if(s[i] == s[i+1] )//中间两个一样
 //    {
-//        while(s[i]==s[i+1])
+//        
+//        num++;
+//        flag = 1;
+//        for(int j = 1; j < s.length()-1; j++)
 //        {
-//            same_num++;
-//            i++;
+//            if( (i-j>=0) && (i+j+1<s.length()) && (s[i-j] == s[i+1+j]))
+//                num++;
+//            else break;
 //        }
-//        cout << "same num = " << same_num << endl;
+//        cout << " 中间两个 num = " << num << endl;
+//        return num; //(num)*2
 //    }
 //    
-//    i = temp;
-    if(s[i] == s[i+1] )//中间两个一样
+//    else    //中间一个分开 两边一样
+//    {
+///*one_:*/
+//        flag = 0;
+//        for(int k = 1; k < s.length()-1; k++)
+//        {
+//            if( (i-k>=0) && (i+k < s.length()) && (s[i-k] == s[i+k]) )
+//                num++;
+//            else break;
+//            
+//        }
+//        cout << "中间一个 num = " << num << endl;
+//        return num; //2*num+1
+//    }
+//}
+//
+//string longestPalindrome(string s)
+//{
+//    int length = 0;
+//    int max_ = 0;
+//    int index = 0;
+//    int flag = 0;   //判定回文类型 中间是两个还是一个
+//    int final_flag = 0;
+//    
+//    if(s.length() == 1)
+//        return s;
+//    
+//    for(int i = 0; i < s.length()-1;i++)
+//    {
+//        length = expand_center(s,i,flag);
+//        if(length >= max_)
+//        {
+//            max_ = length;
+//            index = i;
+//            final_flag = flag;
+//        }
+//        cout << "i = " << i << "  ";
+//        cout << "index = " << index << "   ; max_ =  " << max_ <<"  ;final flag = " << final_flag << endl;
+//    }
+//    
+//    if(final_flag == 1)
+//        return s.substr(index+1-max_,max_*2);
+//    else
+//        return s.substr(index-max_, max_*2+1);
+//    
+//}
+
+//return the length of the palindrome
+int expand_palindrome(string s, int left, int right)
+{
+    while(left >= 0 && right < s.length() && s[left] == s[right])
     {
-        num++;
-        flag = 1;
-        for(int j = 1; j < s.length()-1; j++)
-        {
-            if( (i-j>=0) && (i+j+1<s.length()) && (s[i-j] == s[i+1+j]))
-                num++;
-            else break;
-        }
-        cout << " 中间两个 num = " << num << endl;
-        return num; //(num)*2
+        left--;
+        right++;
     }
-    
-    else    //中间一个分开 两边一样
-    {
-/*one_:*/
-        flag = 0;
-        for(int k = 1; k < s.length()-1; k++)
-        {
-            if( (i-k>=0) && (i+k < s.length()) && (s[i-k] == s[i+k]) )
-                num++;
-            else break;
-            
-        }
-        cout << "中间一个 num = " << num << endl;
-        return num; //2*num+1
-    }
+    cout << "left = " << left << "   ; right = " << right;
+    cout << "   palin length =  " << right-1-(left+1)+1 << endl;
+    return right - left - 1; // right-1-(left+1)+1
 }
+
 
 string longestPalindrome(string s)
 {
-    int length = 0;
-    int max_ = 0;
+    int len,len1, len2, max_ = 0;
     int index = 0;
-    int flag = 0;   //判定回文类型 中间是两个还是一个
-    int final_flag = 0;
-    
-    if(s.length() == 1)
-        return s;
-    
-    for(int i = 0; i < s.length()-1;i++)
+    int flag = 0;
+    int final_ = 0;
+    for(int i = 0; i<s.length(); i++)
     {
-        length = expand_center(s,i,flag);
-        if(length >= max_)
+        len1 = expand_palindrome(s,i, i+1); //中间是两个
+        len2 = expand_palindrome(s, i, i);  //中间是1个
+        len = max(len1,len2);
+        if(len1>len2)
         {
-            max_ = length;
-            index = i;
-            final_flag = flag;
+            len = len1;
+            flag = 1;
         }
-        cout << "i = " << i << "  ";
-        cout << "index = " << index << "   ; max_ =  " << max_ <<"  ;final flag = " << final_flag << endl;
+        else
+        {
+            len = len2;
+            flag = 0;
+        }
+        if(len > max_)
+        {
+            index = i;
+            max_ = len;
+            final_ = flag;
+        }
+        cout << "最大的回文中心是: " << index << "  ; max_ = " << max_ << "  ; final flag = " << final_  << endl;
     }
     
-    if(final_flag == 1)
-        return s.substr(index+1-max_,max_*2);
-    else
-        return s.substr(index-max_, max_*2+1);
-    
+    return s.substr(index-max_/2+final_, max_);
 }
-
 
 
 
@@ -184,7 +231,7 @@ string longestPalindrome(string s)
 
 int main()
 {
-    string s = "aaaaa";
+    string s = "cccc";
     string longest = longestPalindrome(s);
     cout << "final answer: " << longest << endl;
     return 0;
