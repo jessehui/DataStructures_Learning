@@ -157,5 +157,107 @@ string return_ = string(temp.begin(),temp.end());
 ### 递归算法的时间复杂度
 [http://www.cnblogs.com/python27/archive/2011/12/09/2282486.html]
 
+### int转char*
+```C++
+    int num = 100;
+    char str[25];
+    itoa(num, str, 10);
+    printf("The number 'num' is %d and the string 'str' is %s. \n" , num, str);
+```
 
+上述函数与ANSI标准是不兼容的。能将整数转换为字符串而且与ANSI标准兼容的方法是使用sprintf()函数，请看下例：    
+```C++
+#include<stdio.h>  
+#include <stdlib. h>
+
+void main (void);
+void main (void)
+{
+    int num = 100;
+    char str[25];
+    sprintf(str, " %d" , num);
+   printf ("The number 'num' is %d and the string 'str' is %s. \n" ,
+                          num, str);
+}
+```
+
+在将浮点型数字转换为字符串时，需要使用另外一组函数。以下是用fcvt()函数将浮点型值转换为字符串的一个例子:  
+```C++ 
+# include <stdio. h>
+# include <stdlib. h>
+void main (void);
+void main (void)
+{
+    double num = 12345.678;
+    char * sir;
+    int dec_pl, sign, ndigits = 3; /* Keep 3 digits of precision. * /
+    str = fcvt(num, ndigits, &dec-pl, &sign); /* Convert the float
+                                                 to a string. * /
+    printf("Original number; %f\n" , num) ;  /* Print the original
+                                                 floating-point
+                                                    value. * /
+    printf ("Converted string; %s\n",str);    /* Print the converted
+                                                string's value. * /
+    printf ("Decimal place: %d\n" , dec-pi) ; /* Print the location of
+                                                 the decimal point. * /
+    printf ("Sign: %d\n" , sign) ;            /* Print the sign.
+                                                 0 = positive,
+                                                 1 = negative. * /
+}
+```
+fcvt()函数有4个参数：第一个参数是要转换的浮点型值；第二个参数是转换结果中十进制小数点右侧的位数；第三个参数是指向一个整数的指针，该整数用来返回转换结果中十进制小数点的位置；第四个参数也是指向一个整数的指针，该整数用来返回转换结果的符号(0对应于正值，1对应于负值)。
+
+
+
+### int转string
+```C++
+//1.
+int a = 10;
+char *intStr = itoa(a);
+string str = string(intStr);
+
+
+//2.
+int a = 10;
+stringstream ss;
+ss << a;
+string str = ss.str();
+
+//3.
+#include <string> 
+
+std::string s = std::to_string(42);
+```
+
+C++本身就提供了字符串与整型数之间的互换，那就是利用stringstream。下面是使用方法：
+核心： 利用C++中的stringstream流。 
+由于使用过程比较简单就不再赘述，直接给出示例，重要的地方在示例注释中给予说明。 
+
+完整示例： 
+```C++
+#include <iostream> 
+#include <string> 
+#include <sstream>      //要使用stringstream流应包含此头文件 
+using namespace std; 
+
+int main() 
+{ 
+stringstream stream;     //声明一个stringstream变量 
+int n; 
+string str; 
+
+//string转int 
+stream << "1234";     //向stream中插入字符串"1234" 
+stream >> n;     //从stream中提取刚插入的字符串"1234"  并将其赋予变量n完成字符串到int的转换 
+cout << n << endl;     //输出n 
+
+stream.clear();     //同一stream进行多次转换应调用成员函数clear 
+
+//int转string 
+stream << 1234;     //向stream中插入整型数1234 
+stream >> str;     //从steam中提取刚插入的整型数   并将其赋予变量str完成整型数到string的转换 
+cout << str << endl;     //输出str 
+return 0; 
+} 
+```
 
