@@ -44,6 +44,26 @@ vector初始化:
         vector<int> b(a) ;                             //声明并用向量a初始化向量b
         vector<int> b(a.begin(), a.begin()+3) ;        //将a向量中从第0个到第2个(共3个)作为向量b的初始值
 ```
+
+vector 子集:
+```C++ 
+std::vector<int> first;
+std::vector<int> second;
+std::vector<int> third;
+
+first.assign (7,100);             // 7 ints with a value of 100
+
+std::vector<int>::iterator it;
+it=first.begin()+1;
+
+second.assign (it,first.end()-1); // the 5 central values of first
+
+int myints[] = {1776,7,4};
+third.assign (myints,myints+3);   // assigning from array.
+```
+
+
+
 find用法:  
 `if(find(result.begin(),result.end(), s[i]) != result.end())//重复了`
 
@@ -261,3 +281,17 @@ return 0;
 } 
 ```
 
+### std::min_element / std::max_element
+```c++
+  int main () {
+  int myints[] = {3,7,2,5,6,4,9};
+
+  // using default comparison:
+  std::cout << "The smallest element is " << *std::min_element(myints,myints+7) << '\n';
+  std::cout << "The largest element is "  << *std::max_element(myints,myints+7) << '\n';
+
+}
+```
+template <class ForwardIterator>
+  ForwardIterator max_element (ForwardIterator first, ForwardIterator last);
+包括first,不包括last
