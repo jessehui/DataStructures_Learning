@@ -64,8 +64,30 @@ third.assign (myints,myints+3);   // assigning from array.
 
 
 
-find用法:  
+find用法:
+1.一般用法  
+InputIterator find (InputIterator first, InputIterator last, const T& val);  
+
+first, last  
+Input iterators to the initial and final positions in a sequence. The range searched is [first,last), which contains all the elements between first and last, including the element pointed by first but not the element pointed by last.
+
+val  
+Value to search for in the range.
+T shall be a type supporting comparisons with the elements pointed by InputIterator using operator== (with the elements as left-hand side operands, and val as right-hand side).
+
 `if(find(result.begin(),result.end(), s[i]) != result.end())//重复了`
+
+2. string
+```C++
+string str ("There are two needles in this haystack with needles.");
+string str2 ("needle");
+size_t found = str.find(str2);
+if (found!=std::string::npos)
+  std::cout << "first 'needle' found at: " << found << '\n';
+```
+find直接返回位置的标号(size_t类型)
+
+
 
 ### 6 Zigzag Conversion
 string: 
