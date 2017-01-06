@@ -317,3 +317,56 @@ return 0;
 template <class ForwardIterator>
   ForwardIterator max_element (ForwardIterator first, ForwardIterator last);
 包括first,不包括last
+
+### void *指针
+指针有两个属性:指向变量/对象的地址和长度 
+但是指针只存储地址,长度则取决于指针的类型 
+编译器根据指针的类型从指针指向的地址向后寻址 
+指针类型不同则寻址范围也不同,比如:   
+int*从指定地址向后寻找4字节作为变量的存储单元 
+double*从指定地址向后寻找8字节作为变量的存储单元 
+
+1.void指针是一种特别的指针 
+   void *vp 
+   //说它特别是因为它没有类型 
+   //或者说这个类型不能判断出指向对象的长度 
+
+2.任何指针都可以赋值给void指针 
+   type *p; 
+   vp=p; 
+   //不需转换 
+   //只获得变量/对象地址而不获得大小 
+
+3.void指针赋值给其他类型的指针时都要进行转换 
+   type *p=(type*)vp; 
+   //转换类型也就是获得指向变量/对象大小 
+转:http://icoding.spaces.live.com/blog/cns!209684E38D520BA6!130.entry 
+
+4.void指针不能复引用 
+   *vp//错误 
+   因为void指针只知道,指向变量/对象的起始地址 
+   而不知道指向变量/对象的大小(占几个字节)所以无法正确引用 
+
+5.void指针不能参与指针运算,除非进行转换 
+   (type*)vp++; 
+   //vp==vp+sizeof(type)
+
+
+### NULL 和 nullptr
+在C语言中，NULL通常被定义为如下：
+```C
+ #define NULL ((void *)0) 
+```
+
+而如果换做一个C++编译器来编译的话是要出错的，因为C++是强类型的，void *是不能隐式转换成其他指针类型的. 而又为了解决空指针的问题，所以C++中引入0来表示空指针. NULL就被直接定义为一个整型 0。  在大多数情况下这并不会产生什么问题，但是万一有重载或者模板推导的时候，编译器就无法给出正确结果了。比如下面的情形：
+```C++
+void call_back_process(CCObject* target, void* data);  
+bind(call_back_process, target, NULL);   // error 函数类型是void* 但是我们绑定的是一个整型 0  
+```
+如果我们的编译器是支持nullptr的话，那么我们应该直接使用nullptr来替代NULL的宏定义。正常使用过程中他们是完全等价的。
+
+
+
+
+
+
