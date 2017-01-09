@@ -115,7 +115,68 @@ ListNode* rotateRight(ListNode* head, int k) {
 }
 
 
-
+ListNode* swapPairs(ListNode* head) {
+    if(head == nullptr || head->next == nullptr)
+        return head;
+    
+    ListNode* dummy = new ListNode(0);
+    dummy->next = head;
+    ListNode* new_dummy = dummy;
+    
+    ListNode* head2 = head->next;
+    ListNode* new_head = head2->next;
+    
+    head2->next = head;
+    head->next = new_head;
+    dummy->next = head2;
+    
+    print_list(dummy->next);
+    cout << endl;
+    
+    if(head->next == nullptr)   //这个时候已经调换位置了, 最后一个数是head
+        return dummy->next;
+    
+    for(int i = 0; i < 3; i++)//set the position of head2
+        head2 = head2->next;
+    
+    new_dummy = head;
+    head = new_head;    // set the position of head1
+    
+    while(head2 != nullptr)
+    {
+        
+        new_head = head2->next;
+        
+        
+        //swap
+        head2->next = head;
+        head->next = new_head;
+        new_dummy->next = head2;
+        
+        print_list(dummy->next);
+        
+        if(head->next == nullptr)   //这个时候已经调换位置了, 最后一个数是head
+            break;
+        
+        for(int i = 0; i < 3; i++)//set the position of head2
+        {
+            cout << "(i = " << i << ")  " ;
+        
+            head2 = head2->next;
+        }
+        
+        cout << endl;
+        new_dummy = head;   //set the position of new dummy
+        
+        head = new_head;    // set the position of head1
+        
+       
+        print_list(dummy->next);
+        cout << endl;
+    }
+    
+    return dummy->next;
+}
 
 
 
@@ -129,16 +190,16 @@ int main()
     ListNode *head2 = new ListNode(1);
     ListNode *temp2 = head2;
     
-    for(int i = 1; i < 5 ; i++)
+    for(int i = 1; i < 2 ; i++)
     {
         ListNode *node2 = new ListNode(2*i+1);
         head2->next = node2;
         head2 = node2;
     }
     head2 = temp2;
-    print_list(head2);//1 3 5 7 9
+//    print_list(head2);//1 3 5 7 9
     
-    print_list(rotateRight(head2, 5));
+    swapPairs(head2);
     
     
     return 0;
