@@ -1,31 +1,6 @@
-//
-//  simplify_path.cpp
-//  datastucture_test
-//
-//  Created by Jesse. on 1/10/17.
-//  Copyright © 2017 Jesse. All rights reserved.
-//
-//Given an absolute path for a file (Unix-style), simplify it.
-//
-//For example,
-//path = "/home/", => "/home"
-//path = "/a/./b/../../c/", => "/c"
-//click to show corner cases.
-//
-//Corner Cases:
-//Did you consider the case where path = "/../"?
-//In this case, you should return "/".
-//Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
-//In this case, you should ignore redundant slashes and return "/home/foo".
-
-#include <stdio.h>
-#include <iostream>
-#include <string>
-#include <stack> //push, pop
-
-using namespace std;
-
-string simplifyPath(string path)
+class Solution {
+public:
+    string simplifyPath(string path)
 {
     stack<string> s;
     for(int i = 0; i < path.length();)
@@ -34,7 +9,7 @@ string simplifyPath(string path)
         while(path[i] == '/')
         {
             i++;
-            cout << " i = " << i << endl;
+//            cout << " i = " << i << endl;
         }
         if(i >= path.length() )
             break;
@@ -81,14 +56,14 @@ string simplifyPath(string path)
             {
                 temp--;
             }
-            cout << "substr = " << path.substr(temp,temp2-temp) << " ";   //substr(开始的位置, 长度);
+   //         cout << "substr = " << path.substr(temp,temp2-temp) << " ";   //substr(开始的位置, 长度);
             s.push(path.substr(temp, temp2-temp));
         }
         
     }//end for
     
     //把stack中的string拼起来
-    cout << endl;
+ //   cout << endl;
     string result = "";
     if(s.empty())
         return "/";
@@ -97,24 +72,13 @@ string simplifyPath(string path)
     
     while(s.empty() != true)
     {
-        cout << "top = " << s.top() << " ";
+   //     cout << "top = " << s.top() << " ";
         result = '/' + s.top() + result;
         s.pop();
-        cout << "result = " << result << endl;
+//        cout << "result = " << result << endl;
     }
     
     return result;
     
 }
-
-
-int main()
-{
-    string s = "///eHx/..";
-    string result = simplifyPath(s);
-    cout << "result = " << result << endl;
-    
-    return 0;
-}
-
-
+};
