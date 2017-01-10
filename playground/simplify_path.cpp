@@ -51,7 +51,7 @@ string simplifyPath(string path)
 //                    break;
                 if(s.empty() != true)//为非空 出栈一个
                     s.pop();
-              //  else continue;
+            //    else continue;
             }
             
         }
@@ -59,7 +59,7 @@ string simplifyPath(string path)
         else    //都不是
         {
             int temp = i;
-            while(path[i] != '/')
+            while(i < path.length() && path[i] != '/')
                 i++;
             cout << "substr = " << path.substr(temp,i-temp) << " ";   //substr(开始的位置, 长度);
             s.push(path.substr(temp, i-temp));
