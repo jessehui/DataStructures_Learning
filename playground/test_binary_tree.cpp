@@ -56,13 +56,13 @@ void in_order(TreeNode *root)   //先打最小的值的节点 in order表示按�
     }
 }
 
-void post_order(TreeNode *root)// 最后打印根节点
+void post_order2(TreeNode *root)// 最后打印根节点
 {
     if(root)
     {
-        post_order(root->left);
-        post_order(root->right);
-        printf("%d", root->payload);
+        post_order2(root->left);
+        post_order2(root->right);
+        printf("%d  ", root->payload);
     }
 }
 
@@ -460,6 +460,41 @@ vector<vector<int>> zigzag_order_leetcode(TreeNode *root)
     
 }
 
+void post_order_test(TreeNode *root)
+{
+    stack<TreeNode *> s;
+    TreeNode *current = root;
+    TreeNode *previous = nullptr;//前一次访问的节点 默认为空
+    
+    s.push(current);
+    while(!s.empty())
+    {
+        current = s.top();
+ //       cout<< " current = " << current->payload << endl;
+        if(  (current->left == nullptr && current->right == nullptr) || //两边都为空或者
+           ( previous != nullptr && (previous == current->right || previous == current->left) ) )
+        //或者previous在不为空的情况下 等于当前节点的左子树或者又子树
+        //previous!=nullptr不能省略, 不然如果current某个子树为空, previous也为空就进入循环了, 而实际上并不应该进入
+        {
+            cout << current->payload << "  ";
+            previous = current;
+            s.pop();
+        }
+        
+        else
+        {
+            if(current->right)
+                s.push(current->right);
+            
+            if(current->left)
+                s.push(current->left);
+        }
+        
+        
+    }
+}
+
+
 int main()
 {
     TreeNode *root = new TreeNode(10);
@@ -473,6 +508,8 @@ int main()
     root->right->left->left = new TreeNode(9);
     root->right->left->right = new TreeNode(13);
     root->right->right = new TreeNode(15);
+    root->left->left->right = new TreeNode(5);
+    root->right->right->left = new TreeNode(14);
     
     
     //cout << "Node 4 left: " << root->left->right->left->payload << endl;
@@ -480,23 +517,27 @@ int main()
 //    cout << endl;
 //    level_order(root);
 //    cout << endl;
-    zigzag_order(root);
-    cout << endl;
-    
-    vector<vector<int>> result;
-    
-    
-    result = zigzag_order_leetcode(root);
-    for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
-    {
-        for(vector<int>::iterator it2 = (*it).begin(); it2!= (*it).end();++it2)
-        {
-            cout << *it2 << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
+//    zigzag_order(root);
+//    cout << endl;
+//    
+//    vector<vector<int>> result;
+//    
+//    
+//    result = zigzag_order_leetcode(root);
+//    for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
+//    {
+//        for(vector<int>::iterator it2 = (*it).begin(); it2!= (*it).end();++it2)
+//        {
+//            cout << *it2 << " ";
+//        }
+//        cout << endl;
+//    }
+//    cout << endl;
 
+    post_order2(root);
+    cout << endl;
+    post_order_test(root);
+    cout << endl;
     
     return 0;
     
