@@ -366,6 +366,25 @@ bind(call_back_process, target, NULL);   // error 函数类型是void* 但是我
 如果我们的编译器是支持nullptr的话，那么我们应该直接使用nullptr来替代NULL的宏定义。正常使用过程中他们是完全等价的。
 
 
+### queue 和 stack
+queue队列: 先进先出  
+<queue> 支持: empty(),size(), front()返回最头部的元素(最先进入的元素), back()返回最尾部的元素(最后进入的元素), push(), pop()  
+stack: 后进先出
+<stack> 支持: empty(),size(), top()最顶部的元素(最后进入的元素), push(), pop()
+
+
+### 二维vector遍历
+```C++
+for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
+    {
+        for(vector<int>::iterator it2 = (*it).begin(); it2!= (*it).end();++it2)
+        {
+            cout << *it2 << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+```
 
 
 

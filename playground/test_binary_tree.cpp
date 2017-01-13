@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -227,6 +228,238 @@ void in_order3(TreeNode *root)
     
 }
 
+void level_order(TreeNode *root)
+{
+    queue<TreeNode *> q;
+    TreeNode *current = root;
+    q.push(current);
+    
+    while(!q.empty())
+    {
+        current = q.front();
+        q.pop();
+        
+        cout << current -> payload << " ";
+        
+        if(current->left)
+        {
+            q.push(current->left);
+        }
+        
+        if(current->right)
+        {
+            q.push(current->right);
+        }
+    }
+    
+}
+
+void zigzag_order_test(TreeNode * root) //不行 没办法只用队列做
+{
+    queue<TreeNode*> q;
+    TreeNode* current = root;
+    int flag = 1;   //1,3,5...行 flag-1; 2,4,6....行 flag-0;
+    
+    //先把根节点入列
+    q.push(current);
+    flag = 0;
+    while(!q.empty())
+    {
+        //取出最前边的元素
+        current = q.front();
+        q.pop();
+        cout << current->payload << " ";
+        
+        //入栈下一层的元素
+        if(flag == 0)   //偶数 先入右边的 后入左边的
+        {
+            flag = 1;
+            if(current->right)
+                q.push(current->right);
+            
+            if(current->left)
+                q.push(current->left);
+        }
+        
+        else//flag = 1 奇数行 先入左边, 后入右边
+        {
+            flag = 0;
+            if(current->left)
+                q.push(current->left);
+            
+            if(current->right)
+                q.push(current->right);
+        }
+    }
+}
+
+//两个stack
+void zigzag_order(TreeNode *root)
+{
+    stack<TreeNode *> s_odd;    //存奇数行
+    stack<TreeNode *> s_even;   //存偶数行
+    TreeNode * current = root;
+    int level = 1;
+    
+    s_odd.push(current);
+    while(!s_odd.empty() || !s_even.empty())
+    {
+        if(level%2 == 1)
+        {
+            current = s_odd.top();
+            s_odd.pop();
+            cout << current -> payload << " ";
+            
+            if(s_odd.empty())
+                level++;
+            
+            if(current->left)
+                s_even.push(current->left);
+            
+            if(current->right)
+                s_even.push(current->right);
+            
+            
+            
+        }
+        
+        
+        else    //偶数行
+        {
+            current = s_even.top();
+            s_even.pop();
+            cout << current->payload << " ";
+            
+            if(s_even.empty())
+                level++;
+            
+            if(current->right)
+                s_odd.push(current->right);
+            
+            if(current->left)
+                s_odd.push(current->left);
+        }
+        
+    }
+    
+}
+
+//两个stack
+void zigzag_order2(TreeNode *root)
+{
+    stack<TreeNode *> s_odd;    //存奇数行
+    stack<TreeNode *> s_even;   //存偶数行
+    TreeNode * current = root;
+    int level = 0;
+    
+    s_odd.push(current);
+    while(!s_odd.empty() || !s_even.empty())
+    {
+        if(level%2 == 0)
+        {
+            current = s_odd.top();
+            s_odd.pop();
+            cout << current -> payload << " ";
+            
+            if(s_odd.empty())
+                level++;
+            
+            if(current->left)
+                s_even.push(current->left);
+            
+            if(current->right)
+                s_even.push(current->right);
+            
+            
+            
+        }
+        
+        
+        else    //偶数行
+        {
+            current = s_even.top();
+            s_even.pop();
+            cout << current->payload << " ";
+            
+            if(s_even.empty())
+                level++;
+            
+            if(current->right)
+                s_odd.push(current->right);
+            
+            if(current->left)
+                s_odd.push(current->left);
+        }
+        
+    }
+    
+}
+
+//两个stack
+vector<vector<int>> zigzag_order_leetcode(TreeNode *root)
+{
+    stack<TreeNode *> s_odd;    //存奇数行
+    stack<TreeNode *> s_even;   //存偶数行
+    TreeNode * current = root;
+    int level = 0;
+    vector<vector<int>> result;
+    vector<int> level_group;
+    
+    s_odd.push(current);
+    while(!s_odd.empty() || !s_even.empty())
+    {
+        if(level%2 == 0)
+        {
+            current = s_odd.top();
+            s_odd.pop();
+            cout << current -> payload << " ";
+            level_group.push_back(current->payload);
+            
+            if(s_odd.empty())
+            {
+                level++;
+                result.push_back(level_group);
+                level_group.clear();
+            }
+            
+            if(current->left)
+                s_even.push(current->left);
+            
+            if(current->right)
+                s_even.push(current->right);
+            
+            
+            
+        }
+        
+        
+        else    //偶数行
+        {
+            current = s_even.top();
+            s_even.pop();
+            cout << current->payload << " ";
+            level_group.push_back(current->payload);
+            
+            if(s_even.empty())
+            {
+                level++;
+                result.push_back(level_group);
+                level_group.clear();
+            }
+            
+            if(current->right)
+                s_odd.push(current->right);
+            
+            if(current->left)
+                s_odd.push(current->left);
+        }
+        
+    }
+    
+    return result;
+    
+}
+
 int main()
 {
     TreeNode *root = new TreeNode(10);
@@ -243,10 +476,27 @@ int main()
     
     
     //cout << "Node 4 left: " << root->left->right->left->payload << endl;
-    in_order(root);
+//    in_order3(root);
+//    cout << endl;
+//    level_order(root);
+//    cout << endl;
+    zigzag_order(root);
     cout << endl;
-    in_order3(root);
+    
+    vector<vector<int>> result;
+    
+    
+    result = zigzag_order_leetcode(root);
+    for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
+    {
+        for(vector<int>::iterator it2 = (*it).begin(); it2!= (*it).end();++it2)
+        {
+            cout << *it2 << " ";
+        }
+        cout << endl;
+    }
     cout << endl;
+
     
     return 0;
     
