@@ -539,6 +539,8 @@ int main()
     post_order_test(root);
     cout << endl;
     
+    in_order(root);
+    
     return 0;
     
     
