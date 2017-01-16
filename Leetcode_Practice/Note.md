@@ -387,5 +387,6 @@ for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
 ```
 
 
-
+### hash_set 和 hash_map
+set就是数的集合, 可以以O(1)的效率查找和添加. map是一个key和value对应的集合,类似{('j', "faefa"),('a', "asfasece"),...}
 
