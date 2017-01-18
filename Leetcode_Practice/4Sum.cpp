@@ -1,3 +1,5 @@
+
+//Accepted 但是太繁琐 
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
@@ -24,8 +26,8 @@ public:
         {
             for(int k = j+1; k < nums.size();k++)
             {
-                // if(k==j || k == i || i==j)
-                //     continue;
+                if(k==j || k == i || i==j)
+                    continue;
                 if(hash_set.count(target-nums[i]-nums[j]-nums[k])==1)   //count return only 0 or 1
                 {
                     result.push_back(nums[i]);
@@ -50,3 +52,8 @@ public:
     return final_result;
 }
 };
+
+
+
+
+//
