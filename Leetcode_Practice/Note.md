@@ -2,7 +2,7 @@
 
 ###1 Two Sum
 
-```C++
+```c++
 //1. vector
 vector<int> result;
 result.push_back(1); //末尾添加元素1
@@ -26,7 +26,7 @@ bool compare(int a, int b)
 
 迭代器: 不只是指针. 每个标准库容器都定义了一个名为iterator的成员用来定义自己的迭代器. 它是一种比下标更通用的用法. end是一个超出容器迭代器. 
 使用迭代器遍历容器: 
-```C++ 
+```c++ 
     for(vector<int>::iterator iter = result.begin(); iter != result.end(); ++iter)  //此处使用++iter而不使用iter++只是为了效率上更高
     {
         std::cout << *iter << endl;
@@ -37,7 +37,7 @@ bool compare(int a, int b)
 除了iterator, 每种容器还定义了const_iterator. 只能用于读取容器内元素, 不能通过解引用改变元素的值. 
 
 vector初始化:
-```C++
+```c++
         vector<int> a ;                                //声明一个int型向量a
         vector<int> a(10) ;                            //声明一个初始大小为10的向量
         vector<int> a(10, 1) ;                         //声明一个初始大小为10且初始值都为1的向量
@@ -46,7 +46,7 @@ vector初始化:
 ```
 
 vector 子集:
-```C++ 
+```c++ 
 std::vector<int> first;
 std::vector<int> second;
 std::vector<int> third;
@@ -78,7 +78,7 @@ T shall be a type supporting comparisons with the elements pointed by InputItera
 `if(find(result.begin(),result.end(), s[i]) != result.end())//重复了`
 
 2. string
-```C++
+```c++
 string str ("There are two needles in this haystack with needles.");
 string str2 ("needle");
 size_t found = str.find(str2);
@@ -155,7 +155,7 @@ f(n) = n2
 整个算法的时间复杂度为Ο(n+n2) = Ο(n2)。
 
 ### string 用法
-```C++ 
+```c++ 
 //查找
 str.find("ab");//返回字符串 ab 在 str 的位置
 str.find("ab", 2);//在 str[2]~str[n-1] 范围内查找并返回字符串 ab 在 str 的位置
@@ -200,7 +200,7 @@ string return_ = string(temp.begin(),temp.end());
 [http://www.cnblogs.com/python27/archive/2011/12/09/2282486.html]
 
 ### int转char*
-```C++
+```c++
     int num = 100;
     char str[25];
     itoa(num, str, 10);
@@ -208,7 +208,7 @@ string return_ = string(temp.begin(),temp.end());
 ```
 
 上述函数与ANSI标准是不兼容的。能将整数转换为字符串而且与ANSI标准兼容的方法是使用sprintf()函数，请看下例：    
-```C++
+```c++
 #include<stdio.h>  
 #include <stdlib. h>
 
@@ -224,7 +224,7 @@ void main (void)
 ```
 
 在将浮点型数字转换为字符串时，需要使用另外一组函数。以下是用fcvt()函数将浮点型值转换为字符串的一个例子:  
-```C++ 
+```c++ 
 # include <stdio. h>
 # include <stdlib. h>
 void main (void);
@@ -232,27 +232,23 @@ void main (void)
 {
     double num = 12345.678;
     char * sir;
-    int dec_pl, sign, ndigits = 3; /* Keep 3 digits of precision. * /
-    str = fcvt(num, ndigits, &dec-pl, &sign); /* Convert the float
-                                                 to a string. * /
-    printf("Original number; %f\n" , num) ;  /* Print the original
-                                                 floating-point
-                                                    value. * /
-    printf ("Converted string; %s\n",str);    /* Print the converted
-                                                string's value. * /
-    printf ("Decimal place: %d\n" , dec-pi) ; /* Print the location of
-                                                 the decimal point. * /
-    printf ("Sign: %d\n" , sign) ;            /* Print the sign.
-                                                 0 = positive,
-                                                 1 = negative. * /
+    int dec_pl, sign, ndigits = 3; // Keep 3 digits of precision. * /*/
+    str = fcvt(num, ndigits, &dec-pl, &sign); // Convert the float to a string. * /
+    printf("Original number; %f\n" , num) ;  // Print the original floating-point value. * /
+    printf ("Converted string; %s\n",str);    // Print the converted  string's value. * /
+    printf ("Decimal place: %d\n" , dec-pi) ; /* Print the location of the decimal point. */
+    printf ("Sign: %d\n" , sign) ;            // Print the sign.
+                                              //   0 = positive,
+                                                 1 = negative. 
 }
 ```
+
 fcvt()函数有4个参数：第一个参数是要转换的浮点型值；第二个参数是转换结果中十进制小数点右侧的位数；第三个参数是指向一个整数的指针，该整数用来返回转换结果中十进制小数点的位置；第四个参数也是指向一个整数的指针，该整数用来返回转换结果的符号(0对应于正值，1对应于负值)。
 
 
 
 ### int转string
-```C++
+```c++
 //1.
 int a = 10;
 char *intStr = itoa(a);
@@ -276,7 +272,7 @@ C++本身就提供了字符串与整型数之间的互换，那就是利用strin
 由于使用过程比较简单就不再赘述，直接给出示例，重要的地方在示例注释中给予说明。 
 
 完整示例： 
-```C++
+```c++
 #include <iostream> 
 #include <string> 
 #include <sstream>      //要使用stringstream流应包含此头文件 
@@ -302,6 +298,7 @@ cout << str << endl;     //输出str
 return 0; 
 } 
 ```
+
 
 ### std::min_element / std::max_element
 ```c++
@@ -354,12 +351,12 @@ double*从指定地址向后寻找8字节作为变量的存储单元
 
 ### NULL 和 nullptr
 在C语言中，NULL通常被定义为如下：
-```C
+```c
  #define NULL ((void *)0) 
 ```
 
 而如果换做一个C++编译器来编译的话是要出错的，因为C++是强类型的，void *是不能隐式转换成其他指针类型的. 而又为了解决空指针的问题，所以C++中引入0来表示空指针. NULL就被直接定义为一个整型 0。  在大多数情况下这并不会产生什么问题，但是万一有重载或者模板推导的时候，编译器就无法给出正确结果了。比如下面的情形：
-```C++
+```c++
 void call_back_process(CCObject* target, void* data);  
 bind(call_back_process, target, NULL);   // error 函数类型是void* 但是我们绑定的是一个整型 0  
 ```
@@ -374,7 +371,7 @@ stack: 后进先出
 
 
 ### 二维vector遍历
-```C++
+```c++
 for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
     {
         for(vector<int>::iterator it2 = (*it).begin(); it2!= (*it).end();++it2)
@@ -389,4 +386,116 @@ for(vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it)
 
 ### hash_set 和 hash_map
 set就是数的集合, 可以以O(1)的效率查找和添加. map是一个key和value对应的集合,类似{('j', "faefa"),('a', "asfasece"),...}
+
+### C++ istringstream, ostringstream, stringstream
+需要头文件<sstream>.  
+istringstream，由 istream 派生而来，提供读 string 的功能。
+ostringstream，由 ostream 派生而来，提供写 string 的功能。
+stringstream，由 iostream 派生而来，提供读写 string 的功能。
+
+1. stringstream
+```c++
+stringstream strm; // 创建自由的 stringstream 对象  
+stringstream strm(s); //创建存储 s 的副本的 stringstream 对象，其中 s 是 string 类型的对象 
+strm.str()  //返回 strm 中存储的 string 类型对象  
+strm.str(s)  //将 string 类型的 s 复制给 strm，返回 void
+```
+
+有些程序需要两种处理: 有些处理基于每行实现，而其他处理则要操纵每行中每个单词。可用 stringstreams 对象实现：
+```c++
+string line, word;      // will hold a line and word from input,respectively
+while (getline(cin, line))  // read a line from theinput into line (do per-line processing )    
+{     
+    istringstream stream(line);  // bind to stream to the line we read      
+    while (stream >> word)     
+    {  
+      // read a word from line          
+      // do per-word processing     
+    } 
+} 
+```
+
+2. ostringstream
+ostringstream 对象用来进行格式化的输出，可以方便的将各种类型转换为string类型  
+ostringstream 只支持 << 操作符
+
+ostringstream对象的一个常见用法是，需要在多种数据类型之间实现自动格式化时使用该类类型。例如，有一个数值型数据集合，要获取它们的 string 表示形式，或反之。sstream 输入和输出操作可自动地把算术类型转化为相应的 string 表示形式，反过来也可以
+```c++
+int val1 = 512, val2 = 1024; 
+ostringstream format_message; 
+ // ok: converts values to a string representation  
+format_message << "val1: " << val1 << "\n"<< "val2: " << val2 << "\n";
+
+```
+format_message 的内容是以下字符：val1: 512\nval2: 1024  
+
+
+
+3. istringstream
+
+相反，用 istringstream 读 string 对象，即可重新将数值型数据找回来. 读取istringstream对象自动地将数值型数据的字符表示方式转换为相应的算术值
+```c++
+// str member obtains the string associated with a stringstream 
+istringstream input_istring(format_message.str()); 
+string dump; // place to dump the labels from the formatted message 
+// extracts the stored ascii values, converting back to arithmetic types 
+input_istring >> dump >> val1 >> dump >> val2;  
+cout << val1 << " " << val2 << endl;  
+// prints 512 1024
+```
+format_message.str()成员获取与之前创建的 ostringstream 对象关联的 string 副本. 再将 input_istring 与 string 绑定起来。在读 input_istring 时，相应的值恢复为它们原来的数值型表示形式为了读取input_string，必须把该 string 对象分解为若干个部分。我们要的是数值型数据；为了得到它们，必须读取（和忽略）处于所需数据周围的标号. 
+
+因为输入操作符读取的是有类型的值，因此读入的对象类型必须和由 stringstream 读入的值的类型一致。在本例中，input_istring 分成四个部分：  string 类型的值 val1，接着是 512，然后是 string 类型的值 val2，最后是 1024。一般情况下，使用输入操作符读 string 时，空白符将会忽略。于是，在读与 format_message 关联的 string 时，忽略其中的换行符
+
+
+
+### string.find_last_of(char)
+Searches the string for the last character that matches any of the characters specified in its arguments. Returns the position.  
+Note: The first character is denoted by a value of 0 (not 1).
+
+### C++ auto关键字
+根据初始化表达式自动推断被声明的变量的类型，如：
+```c++ 
+ auto f=3.14;      //double
+ auto s("hello");  //const char*
+ auto z = new auto(9); // int*
+ auto x1 = 5, x2 = 5.0, x3='r';//错误，必须是初始化为同一类型
+```
+但是，这么简单的变量声明类型，不建议用auto关键字，而是应更清晰地直接写出其类型。  
+auto关键字更适用于类型冗长复杂、变量使用范围专一时，使程序更清晰易读
+```c++
+std::vector<int> vect; 
+ for(auto it = vect.begin(); it != vect.end(); ++it)
+ {  //it的类型是std::vector<int>::iterator
+    std::cin >> *it;
+  }
+
+```
+
+在模板函数定义时，如果变量的类型依赖于模板参数，使用auto关键字使得在编译期确定这些类型，如：
+```c++
+ template <class T, class U>
+ void Multiply(T t, U u)
+ {
+      auto v = t * u;
+      std::cout<<v;
+ }
+ ```
+
+### string::npos
+`static const size_t npos = -1;   //definition`  
+Maximum value for size_t  
+npos is a static member constant value with the greatest possible value for an element of type size_t.  
+This value, when used as the value for a len (or sublen) parameter in string's member functions, means "until the end of the string".  
+As a return value, it is usually used to indicate no matches.
+
+
+
+
+
+
+
+
+
+
 
