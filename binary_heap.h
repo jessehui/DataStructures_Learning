@@ -36,7 +36,7 @@ public:
 	//delete the root of the heap
 	void delete_root()
 	{
-		data[0] = data.back();	//传回最后一个元素
+		data[0] = data.back();	//传回最后一个元素 因为要删除(覆盖)第一个元素
 		data.pop_back(); 	//删除最后一个元素 vector的方法 
 		heapify(0);		//堆重排
 		return;
@@ -90,7 +90,7 @@ private:
 
 };
 
-
+//max_binary_heap: 根节点大于子节点
 template <typename T>
 class max_binary_heap : public binary_heap<T>{	//一个模板类继承另一个模板类
 protected:
@@ -100,7 +100,9 @@ protected:
 	}
 };
 
-template <typename>
+
+//min_binary_heap: 根节点小于子节点
+template <typename T>
 class min_binary_heap : public binary_heap<T>{
 protected:
 	virtual bool compare(T a, T b)	//a < b则为真

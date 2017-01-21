@@ -491,11 +491,20 @@ As a return value, it is usually used to indicate no matches.
 
 
 
+### inline function
+ Inline function is introduced which is an optimization technique used by the compilers especially to reduce the execution time. 类似C中的Macro.
+ 內联（inline）指的是在使用函数的地方不进行函数调用，而是将函数的实现代码插入到此处。 这样能够以增加代码大小为代价，省下函数调用过程产生的开销，加快程序执行速度。 內联属于编译器的一个优化措施，而inline关键字就是用来告诉编译器，希望对指定的函数做內联优化。   
+ 相比C中的宏定义, 它有类型检查, 使用更加安全. 
+
+  Sometimes not useful for example in __embedded system__ where large executable size is not preferred at all due to memory constraints.
 
 
+### 完全二叉树 二叉堆
+把完全二叉树(排列紧凑)按照level order顺序可以放在数组中. 那么对于任意一个根节点i(从0开始), 它的子节点分别对应数组中的(2*i+1) 和 (2*i+2).
 
+### priority_queue
+Priority queues are a type of container adaptors, specifically designed such that its first element is always the greatest of the elements it contains, according to some strict weak ordering criterion.
 
-
-
+This context is similar to a heap, where elements can be inserted at any moment, and only the max heap element can be retrieved (the one at the top in the priority queue).
 
 
