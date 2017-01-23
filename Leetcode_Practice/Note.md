@@ -507,4 +507,29 @@ Priority queues are a type of container adaptors, specifically designed such tha
 
 This context is similar to a heap, where elements can be inserted at any moment, and only the max heap element can be retrieved (the one at the top in the priority queue).
 
+### instantiation
+In object-oriented programming (OOP), an instance is a concrete occurrence of any object, existing usually during the runtime of a computer program. Formally, "instance" is synonymous with "object" as they are each a particular value (realization), and these may be called an instance object; "instance" emphasizes the distinct identity of the object. The creation of an instance is called instantiation.
+
+
+### Encapsulation
+A language mechanism for restricting direct access to some of the object's components.
+
+A language construct that facilitates(促进 帮助) the bundling of data with the methods (or other functions) operating on that data. 
+
+### Multiple inheritance
+指的是一个类别可以同时从多于一个父类继承行为与特征的功能。与单一继承相对，单一继承指一个类别只可以继承自一个父类。
+
+### override & overload
+方法的重写(Overriding)和重载(Overloading)是Java多态性的不同表现。重写(Overriding)是父类与子类之间多态性的一种表现，而重载(Overloading)是一个类中多态性的一种表现。  
+如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 (Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它而言，父类中的定义如同被"屏蔽"了。   
+如果在一个类中定义了多个同名的方法，它们或有不同的参数个数或有不同的参数类型或有不同的参数次序，则称为方法的重载(Overloading)。不能通过访问权限、返回类型、抛出的异常进行重载.
+
+
+### polymorphism 多态
+C++多态性是通过虚函数来实现的，虚函数允许子类重新定义成员函数，而子类重新定义父类的做法称为覆盖(override)，或者称为重写。用于接口重用(interface)
+
+
+### sort排序 主要是merge sort(归并排序), quick sort(快速排序), heap sort(堆排序)
+1. merge sort
+
 
