@@ -531,5 +531,16 @@ C++多态性是通过虚函数来实现的，虚函数允许子类重新定义�
 
 ### sort排序 主要是merge sort(归并排序), quick sort(快速排序), heap sort(堆排序)
 1. merge sort
+时间复杂度O(n*logn).
 
+2. quick sort
+平均O(n*logn), 最坏O(n^2), 但不常见. 为了避免最坏情况, 可以引入随机算法, 随机选取pivot轴心. 
+
+3. 
+
+### 
+reverse: `std::reverse(result.begin(), result.end());` <algorithm>
+max/min:
+swap: 
+find_last_of:
 

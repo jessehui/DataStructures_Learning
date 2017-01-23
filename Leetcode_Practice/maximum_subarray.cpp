@@ -19,7 +19,7 @@ public:
             sum = sum+nums[i];
             max_ = std::max(max_,sum);
             if(sum < 0)
-                sum = 0;
+                sum = 0;    //因为如果sum是负的, 下一次加下一个元素, 只会越加越小 所以只要sum<0就清零
             
         }
         return max_;
