@@ -28,7 +28,7 @@ public:
         else
         {
             num_vec++;
-            group.insert(make_pair(temp,num_vec));
+            group.insert(make_pair(temp,num_vec));  //可以直接赋值
             result.push_back(new_);
         //    cout << " size = " << result.size() << endl;
             result[group[temp]].push_back(strs[i]); //不能直接push back 还没新建
