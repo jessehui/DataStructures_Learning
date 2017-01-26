@@ -4,7 +4,7 @@
 ### 数组和链表
 数组优劣: 易于查找引用元素, 但是不容易插入删除元素.   
 链表: 易于插入删除元素. 查找比较麻烦, 用循环一个一个next找.
-```C++
+```c++
 struct node{
     int payload;
     node* next;
@@ -16,7 +16,7 @@ struct node{
 表示 head 是一个指向 node 类型的指针. 初始化时把它定义成空的.
 
 
-```C++
+```c++
 int* p1 = 0;  //ok
 int* p2 = nullptr;  //ok
 
@@ -27,7 +27,8 @@ reference: [http://blog.csdn.net/huang_xw/article/details/8764346]
 
 ### new 和 malloc
 `long *pNumber = (long*)malloc(sizeof(long) * 1000000); //c `  
-`long* pNumber = new long[1000000]; //c++`  
+`long* pNumber = new long[1000000]; //c++`
+
 
 
 ### 数组倒序排列
@@ -61,7 +62,7 @@ reference: [http://blog.csdn.net/huang_xw/article/details/8764346]
 关于递归算法的时间复杂度. 例如斐波那契数列的时间复杂度为O(2^n).
 
 利用递归算法reverse链表:
-```C++
+```c++
 node* reverse_recursive(node *head)
 {
     if(head == nullptr || head->next == nullptr)
@@ -84,18 +85,20 @@ T(n) = T(n-1) + O(1);
      = O(n);    
 
 
-### C++补充知识
+###`c++
+充知识
 this指针:  
 `node(int payload) {this->payload = payload;};`  
 1. this指针是一个隐含于每一个成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
 2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给this指针，然后调用成员函数，每次成员函数存取数据成员时，由隐含使用this指针。
 3. 当一个成员函数被调用时，自动向它传递一个隐含的参数，该参数是一个指向这个成员函数所在的对象的指针。 
-4. 在C++中，this指针被隐含地声明为: X *const this,这意味着不能给this 指针赋值；
+4. `c++
+，this指针被隐含地声明为: X *const this,这意味着不能给this 指针赋值；
    在X类的const成员函数中，this指针的类型为：const X* const, 这说明this指针所指向的这种对象是不可修改的（即不能对这种对象的数据成员进行赋值操作）; 
 5. 由于this并不是一个常规变量，所以，不能取得this的地址。
 
-
-C++类的继承和派生:  
+`c++
+的继承和派生:  
 1. 类的继承，是新的类从已有类那里得到已有的特性。或从已有类产生新类的过程就是类的派生。原有的类称为基类或父类，产生的新类称为派生类或子类。  
 2. 派生类的声明：  
 class 派生类名：继承方式 基类名1， 继承方式 基类名2，...，继承方式 基类名n
@@ -108,14 +111,16 @@ class 派生类名：继承方式 基类名1， 继承方式 基类名2，...，
 
 
 
-关于C++的类中 private, public, protected:  
+关`c++
+类中 private, public, protected:  
 1.类的一个特征就是封装，public和private作用就是实现这一目的。所以：
 用户代码（类外）可以访问public成员而不能访问private成员；private成员只能由类成员（类内）和友元访问。
 2.类的另一个特征就是继承，protected的作用就是实现这一目的。所以：
 protected成员可以被派生类对象访问，不能被用户代码（类外）访问。private成员只能被本类成员（类内）和友元访问，不能被派生类访问；
 
-关于C++类中的构造函数:
-```C++
+关`c++
+中的构造函数:
+```c++
 class Counter
 {
 
@@ -149,8 +154,8 @@ eg:    Counter c1;
 这种构造函数既可以用在类中, 也可以用在结构体中.
 
 
-
-C++ 用new创建对象和直接定义的区别
+`c++
+用new创建对象和直接定义的区别
 系统分配的内存空间位置不同. new可以完全自己掌握什么时候归还空间, 而直接定义的变量由系统控制其生存时间. 
 
 
@@ -175,7 +180,8 @@ BFS breadth firs search: 逐层遍历
 ### 栈和队列
 栈(stack): 新建只能从最上层, 删也只能从最上层删. 后进先出LIFO. 类似一个容器. 自己构造一个栈的话需要这些构造函数:   
 `init(), push(), pop(), top(), isempty(). `  
-因为栈太重要了, C++标准库有标准的实现方式. 但是我们也可以自己构造自己需要的栈结构.
+因为栈太重要了,`c++
+准库有标准的实现方式. 但是我们也可以自己构造自己需要的栈结构.
 应用: 函数的调用. 比如:
 ```C
 void fun_A();
@@ -249,7 +255,7 @@ new 返回指定类型的指针，并且可以自动计算所需要大小。比�
 
 ### template 和 typename
 typename什么地方使用: 用在模板定义里，标明其后的模板参数是类型参数. e.g.:  
-```C++
+```c++
 template<typename  T, typename Y>
 T foo(const T& t, const Y& y){//....};
 
@@ -262,8 +268,10 @@ public:
  //...
 }
 ```
-在c++Template中很多地方都用到了typename与class这两个关键字，而且好像可以替换，是不是这两个关键字完全一样呢?  
-答：class用于定义类，在模板引入c++后，最初定义模板的方法为：template<class T>，这里class关键字表明T是一个类型，后来为了避免class在这两个地方的使用可能给人带来混淆，所以引入了typename这个关键字，它的作用同class一样表明后面的符号为一个类型，这样在定义模板的时候就可以使用下面的方式了：       template<typename T>. 在模板定义语法中关键字class与typename的作用完全一样。
+`c++
+emplate中很多地方都用到了typename与class这两个关键字，而且好像可以替换，是不是这两个关键字完全一样呢?  
+答：class用于定义类，在模板引`c++
+，最初定义模板的方法为：template<class T>，这里class关键字表明T是一个类型，后来为了避免class在这两个地方的使用可能给人带来混淆，所以引入了typename这个关键字，它的作用同class一样表明后面的符号为一个类型，这样在定义模板的时候就可以使用下面的方式了：       template<typename T>. 在模板定义语法中关键字class与typename的作用完全一样。
 
 一个类模板（也称为类属类或类生成类）允许用户为类定义一种模式，使得类中的某些数据成员、默写成员函数的参数、某些成员函数的返回值，能够取任意类型（包括系统预定义的和用户自定义的）。  
 如果一个类中数据成员的数据类型不能确定，或者是某个成员函数的参数或返回值的类型不能确定，就必须将此类声明为模板，它的存在不是代表一个具体的、实际的类，而是代表着一类类。
@@ -276,7 +284,7 @@ public:
 typename第二个应用: 模板中标明“内嵌依赖类型名”.
 
 ### class构造函数冒号问题
-```C++
+```c++
 class TEST
 {
     public:
@@ -337,14 +345,15 @@ void f(const int i) { i=10;//error! }
 要删除节点: 比如删除根节点, 就把最后的元素放在删除了的节点上, 然后按符合的关系调换位置直到满足要求. (拿取根节点可以看做是堆排序)
 
 
-### C++友元
+###`c++
+元
 只有类的成员函数才能访问类的私有成员，程式中的其他函数是无法访问私有成员的。非成员函数能够访问类中的公有成员，但是假如将数据成员都定义 为公有的，这又破坏了隐藏的特性。另外，应该看到在某些情况下，特别是在对某些成员函数多次调用时，由于参数传递，类型检查和安全性检查等都需要时间开 销，而影响程式的运行效率。
 
 　　为了解决上述问题，提出一种使用友元的方案。友元是一种定义在类外部的普通函数，但他需要在类体内进行说 明，为了和该类的成员函数加以区别，在说明时前面加以关键字friend。友元不是成员函数，但是他能够访问类中的私有成员。友元的作用在于提高程式的运 行效率，但是，他破坏了类的封装性和隐藏性，使得非成员函数能够访问类的私有成员。
 
 　　友元能够是个函数，该函数被称为友元函数(friend function)；友元也能够是个类，该类被称为友元类。
 
-```C++
+```c++
 class Point
 　　{
 　　public:
@@ -374,13 +383,15 @@ class Point
 　　p2.Getxy();
 　　double d = Distance(p1, p2);
 　　cout<<"Distance is"<<< FONT>
-　　}```
+　　}
+```
 
 在该程式中的Point类中说明了一个友元函数Distance()，他在说明时前边加friend关键字，标识他不是成员函数，而是友元函数。 他的定义方法和普通函数定义相同，而不同于成员函数的定义，因为他无需指出所属的类。但是，他能够引用类中的私有成员，函数体中 a.x，b.x，a.y，b.y都是类的私有成员，他们是通过对象引用的。在调用友元函数时，也是同普通函数的调用相同，不要像成员函数那样调用。本例 中，p1.Getxy()和p2.Getxy()这是成员函数的调用，要用对象来表示。而Distance(p1, p2)是友元函数的调用，他直接调 用，无需对象表示，他的参数是对象。(该程式的功能是已知两点坐标，求出两点的距离。)
 
 
 
-### C++ class中的 public, private, protected
+###c++
+class中的 public, private, protected
 类的一个特征就是封装，public和private作用就是实现这一目的。所以：
 用户代码（类外）可以访问public成员而不能访问private成员；private成员只能由类成员（类内）和友元访问。
 
@@ -396,7 +407,7 @@ protected成员可以被派生类对象访问，不能被用户代码（类外�
 2.protected成员可以被派生类访问。
 
 
-```C++
+```c++
 #include<iostream>
 #include<assert.h>
 using namespace std;
@@ -505,12 +516,13 @@ int main(){
 ```
 
 
-### C++的一些名词
+###`c++
+一些名词
 面向对象的三大特征：
 1.封装(Encapsulation)：保证对象自身数据的完整性、安全性
 2.继承(inheritance)：建立类之间的关系，实现代码复用、方便系统的扩展
-3.多态(polymorphism)：相同的方法调用可实现不同的实现方式。多态是指两个或多个属于不同类的对象，对于同一个消息（方法调用）作出不同响应的方式。多态性可以简单地概括为“一个接口，多种方法”，程序在运行时才决定调用的函数，它是面向对象编程领域的核心概念。多态(polymorphism)，字面意思多种形状。
-C++支持两种多态性：编译时多态性，运行时多态性。
+3.多态(polymorphism)：相同的方法调用可实现不同的实现方式。多态是指两个或多个属于不同类的对象，对于同一个消息（方法调用）作出不同响应的方式。多态性可以简单地概括为“一个接口，多种方法”，程序在运行时才决定调用的函数，它是面向对象编程领域的核心概念。多态(polymorphism)，字面意思多种形状。`c++
+持两种多态性：编译时多态性，运行时多态性。
 
 a. 编译时多态性：通过重载函数实现
 
@@ -519,15 +531,15 @@ b. 运行时多态性：通过虚函数实现。
 ### 虚函数
 同一类中是不能定义两个名字相同、参数个数和类型都相同的函数的，否则就是“重复定义”。但是在类的继承层次结构中，在不同的层次中可以出现名字相同、参数个数和类型都相同而功能不同的函数。  
 人们提出这样的设想，能否用同一个调用形式，既能调用派生类又能调用基类的同名函数。在程序中不是通过不同的对象名去调用不同派生层次中的同名函数，而是通过__指针__调用它们。  
-例如，用同一个语句“pt->display( );”可以调用不同派生层次中的display函数，只需在调用前给指针变量 pt 赋以不同的值(使之指向不同的类对象)即可。  
-C++中的虚函数就是用来解决这个问题的。虚函数的作用是允许在派生类中重新定义与基类同名的函数，并且可以通过基类指针或引用来访问基类和派生类中的同名函数。
+例如，用同一个语句“pt->display( );”可以调用不同派生层次中的display函数，只需在调用前给指针变量 pt 赋以不同的值(使之指向不同的类对象)即可。  `c++
+的虚函数就是用来解决这个问题的。虚函数的作用是允许在派生类中重新定义与基类同名的函数，并且可以通过基类指针或引用来访问基类和派生类中的同名函数。
 
 
 虚函数为了重载和多态的需要，在基类中是有定义的，即便定义是空. 所以子类中可以重写也可以不写基类中的函数！
 
 纯虚函数在基类中是没有定义的，必须在子类中加以实现. 引入原因：为了方便使用多态特性，我们常常需要在基类中定义虚函数。  
 Example: 
-```C++
+```c++
 class Cman
 
 {
@@ -580,7 +592,7 @@ p->Move(); //子类中没有该成员函数，所以调用的是基类中的
 
 
 ### vector
-```C++
+```c++
 vector<int> vec;
 vec.push_back(1);  
 ```
@@ -591,7 +603,7 @@ vec.end();       // 指向迭代器中末端元素的下一个，指向一个不
 vec.pop_back();  //删除最后一个数据, 并减少容器尺寸
 
 如果是二维vector:  
-```C++
+```c++
 vector<vector<int>> g;
 
 g.size();//是第一维长度
@@ -617,8 +629,10 @@ Find：确定元素属于哪一个子集。它可以被用来确定两个元素�
 Union：将两个子集合并成同一个集合。
 
 ### auto关键字
-编程语言中的“动态类型”,在运行时来进行类型检查，而C++中类型检查是在编译阶段。动态类型语言能做到在运行时决定类型，主要归功于一技术，这技术是类型推导。事实上，类型推导也可以用于静态类型语言中.C++11中类型推导的实现之一就是重定义auto关键字，另一个实现是decltype。
-```C++
+编程语言中的“动态类型”,在运行时来进行类型检查，`c++
+类型检查是在编译阶段。动态类型语言能做到在运行时决定类型，主要归功于一技术，这技术是类型推导。事实上，类型推导也可以用于静态类型语言中`c++
+1中类型推导的实现之一就是重定义auto关键字，另一个实现是decltype。
+```c++
 
 // 1. 自动帮助推导类型  
     auto a = 10;  
@@ -648,11 +662,13 @@ int main()
 
 
 ### list
- C++ STL中的list是双向循环链表，每一个元素都知道前面一个元素和后面一个元素。  
+`c++
+STL中的list是双向循环链表，每一个元素都知道前面一个元素和后面一个元素。  
  push_back()方法也是在最后添加一个元素.
 
 
-### C++参数传递
+###`c++
+数传递
 
 值传递：形参是实参的拷贝，改变形参的值并不会影响外部实参的值。从被调用函数的角度来说，值传递是单向的（实参->形参），参数的值只能传入,不能传出。当函数内部需要修改参数，并且不希望这个改变影响调用者时，采用值传递。  
 
@@ -670,10 +686,12 @@ int main()
 从概念上讲。指针从本质上讲就是存放变量地址的一个变量，在逻辑上是独立的，它可以被改变，包括其所指向的地址的改变和其指向的地址中所存放的数据的改变。
 而引用是一个别名，它在逻辑上不是独立的，它的存在具有依附性，所以引用必须在一开始就被初始化，而且其引用的对象在其整个生命周期中是不能被改变的（自始至终只能依附于同一个变量）。
 
-总结: C++中尽量用引用传递代替指针传递, 更安全一些.
+总结:`c++
+尽量用引用传递代替指针传递, 更安全一些.
 
 
-### C++ struct和class
+###`c++
+struct和class
 由于struct 和 class 的可替换性，什么时候用struct 和什么时候用class的选择就相当主观了。通常大家的直觉是一致的: struct 应该应用于POD(Plain old data)类型的对象. 用一个词来描述，他们更像是记录, 一个简单的集合，里面有几个字段， 例如 struct Color, struct Rect, struct Point 等都是我们常见的结构。
 
 而class 实际上更适合用于抽象主动的对象, 他们通常可以有复杂的继承关系(个人认为太复杂是一种作死的行为，稍后解释)。 或许有更多的方法和逻辑。对于class来讲，内部数据除了理解为记录, 更有一部分是“状态”。
@@ -690,14 +708,15 @@ git add `ls |grep -v "kruskal.cpp"`
 
 ### std::sort()
 利用标准模板库中的sort函数进行升序排序.
-```C++
+```c++
 //a<b 1; a>b 0
 bool compare_weight(edge a, edge b)
 {
   return a.weight < b.weight
 }
   //sorting edges by weight
-  //这里用的C++ STL中的排序函数sort(), 最后一个参数是一个自己定义的函数,表示用这个函数来进行排序, 这样可以sort升序或者降序
+  //这里用`c++
+  STL中的排序函数sort(), 最后一个参数是一个自己定义的函数,表示用这个函数来进行排序, 这样可以sort升序或者降序
   //前边的两个参数表示范围
   std::sort(edges.begin(), edges.end(), compare_weight);
 
@@ -706,8 +725,10 @@ bool compare_weight(edge a, edge b)
 ### 单源最短路径算法
 出发点固定 从出发点到任意一点的距离固定. Dijkastra算法.
 
-###C++ operator关键字
-```C++ 
+##`c++
+operator关键字
+```c++
+
 class test1
 {
 public: 
@@ -747,8 +768,9 @@ HASH主要用于信息安全领域中加密算法，它把一些不同长度的�
 set和map: set是一个集合, map是key和value的有序对(通过key查找时间复杂度为O(1),通过value查找时间复杂度是O(n))
 
 
-### C++ 模板库unordered_set
-C++ 11中出现了两种新的关联容器:unordered_set和unordered_map，其内部实现与set和map大有不同，set和map内部实现是基于RB-Tree(红黑树)，而unordered_set和unordered_map内部实现是基于哈希表(hashtable).
+###`c++
+模板库unordered_set`c++
+11中出现了两种新的关联容器:unordered_set和unordered_map，其内部实现与set和map大有不同，set和map内部实现是基于RB-Tree(红黑树)，而unordered_set和unordered_map内部实现是基于哈希表(hashtable).
 通过前面说的哈希函数，会发现其都位于数组的相同位置，这里，就涉及到“冲突”。准确来说，冲突是不可避免的，而解决冲突的方法常见的有：开发地址法、再散列法、链地址法(也称拉链法)。而unordered_set内部解决冲突采用的是----链地址法，当用冲突发生时把具有同一关键码的数据组成一个链表。
 
 无序集合容器（unordered_set）是一个存储唯一(unique，即无重复）的关联容器（Associative container），容器中的元素无特别的秩序关系，该容器允许基于值的快速元素检索，同时也支持正向迭代.
@@ -770,21 +792,25 @@ class stack
 就必须指明是什么类型，否则是无法通过编译的。使用重载来解决这个问题，即对N种不同的参数类型写N个
 push和pop算法，这样是很麻烦的，代码也无法通用。
 
-泛型在C++中的主要实现为模板函数和模板类。  
-虽然在C++中可以通过函数重载来解决这个问题，但是反复写相同算法的函数是比较辛苦的，
+泛型`c++
+的主要实现为模板函数和模板类。  
+虽然`c++
+可以通过函数重载来解决这个问题，但是反复写相同算法的函数是比较辛苦的，
 更重要的是函数重载是静态编译，运行时占用过多内存。
 
-在此我们可以用C++的模板函数来表达通用型的函数，如下：
-```C++
+在此我们可以`c++
+模板函数来表达通用型的函数，如下：
+```c++
 template<typename T> // 模板声明
 T add(T a,T b) { return a+b; }  // 注意形参和返回值的类型
 ```
 
-这时C++编译器会根据add函数的参数类型来生成一个与之对应的带具体参数类型的函数并
+这`c++
+译器会根据add函数的参数类型来生成一个与之对应的带具体参数类型的函数并
 调用。
-
-C++模版类的语法
-```C++
+`c++
+版类的语法
+```c++
 /*
 template  <class 模版参数列表…>
 class 类名
@@ -810,17 +836,20 @@ class A {
 为了提高效率，可以将函数声明改为voidFunc(A &a)，因为“引用传递”仅借用一下参数的别名而已，不需要产生临时对象。但是函数voidFunc(A &a) 存在一个缺点：  
 “引用传递”有可能改变参数a，这是我们不期望的。解决这个问题很容易，加const修饰即可，因此函数最终成为voidFunc(const A &a)。
 
-The addition of an ‘&’ to the parameter name in C++ (which was a very confusing choice of symbol because an ‘&’ in front of variables elsewhere in C generates pointers!) causes the actual variable itself, rather than a copy, to be used as the parameter in the subroutine and therefore can be written to thereby passing data back out the subroutine. Therefore  
-```C++
+The addition of an ‘&’ to the parameter name in`c++
+(which was a very confusing choice of symbol because an ‘&’ in front of variables elsewhere in C generates pointers!) causes the actual variable itself, rather than a copy, to be used as the parameter in the subroutine and therefore can be written to thereby passing data back out the subroutine. Therefore  
+```c++
 void Subroutine3(int &Parameter1) 
 { Parameter1=96;}
 ```  
-would set the variable it was called with to 96. This method of passing a variable as itself rather than a copy is called a ‘reference’ in C++.
+would set the variable it was called with to 96. This method of passing a variable as itself rather than a copy is called a ‘reference’ in`c++
+
 
 >const 成员函数
 
 任何不会修改数据成员的函数都应该声明为const类型。如果在编写const成员函数时，不慎修改了数据成员，或者调用了其它非const成员函数，编译器将指出错误，这无疑会提高程序的健壮性。以下程序中，类stack的成员函数GetCount仅用于计数，从逻辑上讲GetCount应当为const函数。编译器将指出GetCount函数中的错误。
-```C++ 
+```c++
+
 class Stack
 {
 public:
@@ -916,7 +945,8 @@ Heuristic 启发式方法（试探法）是一种帮你寻求答案的技术，�
 引用就是某一变量（目标）的一个别名，对引用的操作与对变量直接操作完全一样。  
 `int a; int &ra=a; //定义引用ra,它是变量a的引用，即别名`  
 
-引用的一个重要作用就是作为函数的参数。以前的C语言中函数参数传递是值传递，如果有大块数据作为参数传递的时候，采用的方案往往是指针，因为 这样可以避免将整块数据全部压栈，可以提高程序的效率。但是现在（C++中）又增加了一种同样有效率的选择（在某些特殊情况下又是必须的选择），就是引用。
+引用的一个重要作用就是作为函数的参数。以前的C语言中函数参数传递是值传递，如果有大块数据作为参数传递的时候，采用的方案往往是指针，因为 这样可以避免将整块数据全部压栈，可以提高程序的效率。但是现在`c++
+）又增加了一种同样有效率的选择（在某些特殊情况下又是必须的选择），就是引用。
 
 常引用声明方式：const 类型标识符 &引用名=目标变量名；  用这种方式声明的引用，不能通过引用对目标变量的值进行修改,从而使引用的目标成为const，达到了引用的安全性。 
 
@@ -935,7 +965,8 @@ longest common subsequence problem.
 
 
 ### 内存机制
- 一个由C/C++编译的程序占用的内存分为以下几个部分  
+ 一个由C`c++
+ 译的程序占用的内存分为以下几个部分  
   1、栈区（stack）—   由编译器自动分配释放   ，存放函数的参数值，局部变量的值等。其  
   操作方式类似于数据结构中的栈。  
   2、堆区（heap）   —   一般由程序员分配释放，   若程序员不释放，程序结束时可能由OS回  

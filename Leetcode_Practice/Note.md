@@ -544,3 +544,24 @@ max/min:
 swap: 
 find_last_of:
 
+
+### Binary Tree
+- Binary Search Tree: 二叉查找树（英语：Binary Search Tree），也称二叉搜索树、有序二叉树（英语：ordered binary tree），排序二叉树（英语：sorted binary tree），是指一棵空树或者具有下列性质的二叉树:
+  - 若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+  - 若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；
+  - 任意节点的左、右子树也分别为二叉查找树；
+  - 没有键值相等的节点。
+
+
+- Balanced Binary Tree: A balanced binary tree has the minimum possible maximum height (a.k.a. depth) for the leaf nodes.
+One common balanced tree structure is a binary tree structure in which the left and right subtrees of every node differ in height by no more than 1.
+
+- Self-balancing Binary Search Tree(AVL Tree): 自平衡二叉树.一般的二叉查找树的查询复杂度是跟目标结点到树根的距离（即深度）有关，因此当结点的深度普遍较大时，查询的均摊复杂度会上升，为了更高效的查询，平衡树应运而生.它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。An AVL tree (Georgy Adelson-Velsky and Evgenii Landis' tree, named after the inventors) is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; If at any time they differ by more than one, rebalancing is done to restore this property. 
+
+- Complete Binary Tree: In a complete binary tree, every level except possibly the last, is completely filled, and all nodes in the last level are as far left as possible.
+
+
+
+
+
+

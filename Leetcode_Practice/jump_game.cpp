@@ -29,3 +29,27 @@ public:
 
 
 //As straightforward as it is. Just update the current max position it can reach.
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+    	int target = nums.size()-1;
+    	int current_max = 0;
+    	for(int i = 0; i <= current_max && i<= target; i++)
+        {
+        	current_max = max(nums[i]+i, curent_max);
+        	if(target <= current_max)
+        		return true;
+        }
+        return false;
+
+    }
+
+}
+
+
+
+
+
+
+
+
