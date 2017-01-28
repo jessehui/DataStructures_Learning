@@ -65,6 +65,7 @@ third.assign (myints,myints+3);   // assigning from array.
 
 
 find用法:
+注意algorithm中的find的时间复杂度是O(n).  
 1.一般用法  
 InputIterator find (InputIterator first, InputIterator last, const T& val);  
 
@@ -562,6 +563,68 @@ One common balanced tree structure is a binary tree structure in which the left 
 
 
 
+### cbegin, cend()
+A const_iterator is an iterator that points to const content. This iterator can be increased and decreased (unless it is itself also const), just like the iterator returned by unordered_map::begin, but it cannot be used to modify the contents it points to.
+只能用于循环 不能用于修改.
 
+### unordered_map中的key和value的对应
+Iterators to elements of unordered_map containers access to both the key and the mapped value. For this, the class defines what is called its value_type, which is a pair class with its first value corresponding to the const version of the key type (template parameter Key) and its second value corresponding to the mapped value (template parameter T):  
+`typedef pair<const Key, T> value_type;`
+
+Iterators of a unordered_map container point to elements of this value_type. Thus, for an iterator called it that points to an element of a map, its key and mapped value can be accessed respectively with:
+```c++
+unordered_map<Key,T>::iterator it;
+(*it).first;             // the key value (of type Key)
+(*it).second;            // the mapped value (of type T)
+(*it);                   // the "element value" (of type pair<const Key,T>)
+```
+
+Naturally, any other direct access operator, such as -> or [] can be used, for example:
+```c++
+it->first;               // same as (*it).first   (the key value)
+it->second;              // same as (*it).second  (the mapped value) 
+```
+指针class用`->`, 对象class用`.`
+
+
+`unordered_map::find()`Searches the container for an element with k as key and returns an `iterator` to it if found, otherwise it returns an `iterator` to unordered_map::end (the element past the end of the container).
+
+
+### pair
+`#inlcude <utility>`
+- 概述:  
+pair是一种模板类型，其中包含两个数据值，两个数据的类型可以不同，基本的定义如下：
+ 
+`pair<int, string> a;`
+
+表示a中有两个类型，第一个元素是int型的，第二个元素是string类型的，如果创建pair的时候没有对其进行初始化，则调用默认构造函数对其初始化。
+ 
+`pair<string, string> a("James", "Joy");`
+也可以像上面一样在定义的时候直接对其初始化。
+ 
+由于pair类型的使用比较繁琐，因为如果要定义多个形同的pair类型的时候，可以时候typedef简化声明：
+typedef pair<string, string> author;
+author pro("May", "Lily");
+author joye("James", "Joyce");
+
+- pair对象的操作:
+1. 对于pair类，由于它只有两个元素，分别名为first和second，因此直接使用普通的点操作符即可访问其成员
+```c++
+pair<string, string> a("Lily", "Poly"); 
+string name;
+name = a.second;
+```
+
+2. 生成新的pair对象:  
+可以使用make_pair对已存在的两个数据构造一个新的pair类型：
+```c++
+int a = 8;
+string m = "James";
+pair<int, string> newone;
+newone = make_pair(a, m);
+```
+
+### sort
+sort可以用于string
 
 
