@@ -39,12 +39,12 @@ public:
       		copy->next = new_node;
   			copy = copy->next;
 
-      		if(current->random!=nullptr)
-      		{
+      		// if(current->random!=nullptr)		//所有点都要存, 不能只存有random的点
+      		// {
       			copy->random = current->random;
       			ptr_map[current] = copy;	//	<key: old, value: new>
       			
-      		}
+      		// }
 
       		current = current->next;
 
