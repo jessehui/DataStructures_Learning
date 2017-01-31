@@ -80,3 +80,34 @@ public:
 
     }
 };
+
+
+
+//top method
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+    	int map_s[128] = {0};   //ascii 码表 0~127
+    	int map_t[128] = {0};
+    	int i = 0;
+    	while(i<s.size())
+    	{
+    		if(map_s[s[i]] != map_t[t[i]])	//有一个地方是0 有一个地方不是 说明有一个地方已经被写过了 说明一个有重复
+    			return false;
+
+    		map_s[s[i]] = i+1;		//初始值是0
+    		map_t[t[i]] = i+1;
+
+    		i++;
+
+    	}
+
+    	return true;
+
+    }
+
+};
+
+
+
+
