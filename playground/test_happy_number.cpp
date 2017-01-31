@@ -34,11 +34,44 @@ bool isHappy(int n) {
 
 
 
+int countPrimes(int n) {
+    int count = 0;
+    if(n <= 1)
+        return count;
+    vector<bool> number(n,true);
+    
+    for(int i = 2; i*i <= n; i++)   //just need to check  number<sqrt(n)
+    {
+        if(!number[i])
+            continue;
+        for(int j = i*i; j < n; j+=i)
+        {
+            number[j] = false;
+            cout << "not prime numbers: " << j << " ";
+        }
+        cout << endl;
+    }
+    
+    
+    for(int i = 2; i<n; i++ )
+    {
+        if(number[i] == true)
+        {
+            count ++;
+            cout << " prime numbers " << i << " ";
+        }
+    }
+    cout << endl;
+    return count;
+    
+}
+
+
+
 int main()
 {
-    int test = 2;
-    cout << " is " << test << " happy number? " << "  ";
-    cout << isHappy(test) << endl;
-    
+    int test = 6;
+    cout << "count primes = " << countPrimes(test);
+    cout << endl;
     return 0;
 }
