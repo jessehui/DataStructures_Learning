@@ -640,3 +640,6 @@ string to_string (double val);
 string to_string (long double val);
 ```
 Returns a string with the representation of val.
+
+### pow
+c++中指数不能用`^`, 要用`pow(底数,指数)`表示.
