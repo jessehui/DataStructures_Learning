@@ -85,7 +85,7 @@ T(n) = T(n-1) + O(1);
      = O(n);    
 
 
-###`c++
+###
 充知识
 this指针:  
 `node(int payload) {this->payload = payload;};`  
@@ -111,14 +111,14 @@ class 派生类名：继承方式 基类名1， 继承方式 基类名2，...，
 
 
 
-关`c++
+
 类中 private, public, protected:  
 1.类的一个特征就是封装，public和private作用就是实现这一目的。所以：
 用户代码（类外）可以访问public成员而不能访问private成员；private成员只能由类成员（类内）和友元访问。
 2.类的另一个特征就是继承，protected的作用就是实现这一目的。所以：
 protected成员可以被派生类对象访问，不能被用户代码（类外）访问。private成员只能被本类成员（类内）和友元访问，不能被派生类访问；
 
-关`c++
+
 中的构造函数:
 ```c++
 class Counter
@@ -703,7 +703,7 @@ struct和class
 ### git提交例子
 shell文件反选例子: 
 ```shell
-git add `ls |grep -v "kruskal.cpp"`
+git add `ls |grep -v "kruskal.cpp"`git
 ```
 
 ### std::sort()
