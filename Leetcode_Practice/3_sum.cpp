@@ -180,3 +180,65 @@ public:
         return final;
     }
 };
+
+
+
+//new method    better performance 38.73%
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        vector<vector<int>> result;
+        if(nums.size()<3)
+            return result;
+        int target = 0; //could be changed to other numbers
+
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i< nums.size(); i++)
+        {
+          //  int third_num = nums[i];
+            int front = i+1;
+            int back = nums.size()-1;
+
+            while(front<back)
+            {
+                int sum = nums[front] + nums[back] + nums[i]; //(i is fixed, change front and back)
+                if(sum > target)
+                    back--;
+
+                else if(sum < target)
+                    front++;
+
+                else    //equal
+                {
+                    vector<int> temp ;
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[front]);
+                    temp.push_back(nums[back]);
+                    result.push_back(temp);
+
+                    //jump the same numbers
+                    while(front < back && nums[front] == temp[1])
+                        front++;
+
+                    //same for back
+                    while(front < back && nums[back] == temp[2])
+                        back--;
+                }
+
+            }
+
+            //jump the same number for i
+            while(i < nums.size() -1 && nums[i] == nums[i+1])
+                i++;    
+        }
+        
+        return result;
+    }
+};
+
+
+
+
+
+
