@@ -18,7 +18,7 @@
 
 using namespace std;
 
-vector<vector<int>> fourSum(vector<int>& nums, int target) {
+vector<vector<int>> fourSum2(vector<int>& nums, int target) {
     vector<int> result;
     vector<vector<int>> final_result;
     unordered_set<int> hash_set;
@@ -121,11 +121,75 @@ bool isValidSudoku(vector<vector<char>>& board) {
     return true;
 }
 
+vector<vector<int>> fourSum(vector<int>& nums, int target);
+
 int main()
 {
-    vector<int> a = {1,0,-1,0,-2,2};
-    fourSum(a, 0);
+    vector<int> a = {0,0,0,0};
+    vector<vector<int>> result = fourSum(a, 0);
+    cout << "final result: " << endl;
+    for(auto it = 0; it < result.size(); it++)
+    {
+        for(auto i = result[it].begin(); i != result[it].end(); i++)
+        {
+            cout << *i << " ";
+        }
+        cout << endl;
+    }
+    
     return 0;
+}
+
+
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+    vector<vector<int>> result;
+    if(nums.size()<4)
+        return result;
+    
+    vector<int> temp;
+    unordered_set<int> hash_set;
+    sort(nums.begin(),nums.end());
+    cout << "test: " << endl;
+    for(int i = 0; i<nums.size(); i++ )
+    {
+        
+        for(int j = i+1; j<nums.size(); j++)
+        {
+            if(i != 0 && nums[i] == nums[i-1])
+                continue;
+            
+            for(int k = j+1; k < nums.size(); k++)
+            {
+//                if(j != i+1 && nums[j] == nums[j-1])
+//                    continue;
+                int fourth = target-nums[i]-nums[j]-nums[k];
+                if(hash_set.count(fourth))
+                {
+                    
+                    temp.push_back(fourth);
+                    temp.push_back(nums[i]);
+                    
+                    temp.push_back(nums[j]);
+                    
+                    temp.push_back(nums[k]);
+                    if(result.size() == 0 || result.back() != temp)
+                        result.push_back(temp);
+                    
+                    temp.clear();
+                }
+                
+            }
+            
+            
+        }
+        hash_set.insert(nums[i]);
+        cout << "0" << " ";
+        
+        
+    }
+    
+    return result;
+    
 }
 
 
