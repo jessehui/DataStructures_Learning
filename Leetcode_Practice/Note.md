@@ -643,3 +643,38 @@ Returns a string with the representation of val.
 
 ### pow
 c++中指数不能用`^`, 要用`pow(底数,指数)`表示.
+
+
+### split
+```c++
+  #include <boost/algorithm/string.hpp> //must have
+  string s = "a,b, c ,,e,f,";
+  vector <string> fields;
+
+  cout << "Original = \"" << s << "\"\n\n";
+
+  cout << "Split on \',\' only\n";
+  split( fields, s, is_any_of( "," ) );
+  print( fields );
+
+```
+
+or
+```c++
+int main()
+{
+    string str("Split me by whitespaces");
+    string buf; // Have a buffer string
+    stringstream ss(str); // Insert the string into a stream
+    
+    vector<string> tokens; // Create vector to hold our words
+    
+    while (ss >> buf)
+        tokens.push_back(buf);
+    
+    for(auto it = tokens.begin(); it != tokens.end(); it++)
+    {
+        cout << *it << endl;
+    }
+}
+```
