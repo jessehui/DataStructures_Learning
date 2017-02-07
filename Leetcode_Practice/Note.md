@@ -678,3 +678,21 @@ int main()
     }
 }
 ```
+
+
+### STL之multimap
+`multimap::equal_range`  
+`pair<iterator,iterator>             equal_range (const key_type& k);`  
+
+Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+The function returns a pair, whose member pair::first is the lower bound of the range (the same as lower_bound), and pair::second is the upper bound (the same as upper_bound).
+
+```c++
+    //打印相同主键的所有元素
+    std::pair <std::multimap<char,int>::iterator, std::multimap<char,int>::iterator> ret;
+    ret = mymm.equal_range(ch);
+    std::cout << ch << " =>";
+    for (std::multimap<char,int>::iterator it=ret.first; it!=ret.second; ++it)
+      std::cout << ' ' << it->second;
+    std::cout << '\n';
+```
