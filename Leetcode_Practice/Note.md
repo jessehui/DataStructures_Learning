@@ -696,3 +696,7 @@ The function returns a pair, whose member pair::first is the lower bound of the 
       std::cout << ' ' << it->second;
     std::cout << '\n';
 ```
+
+
+### append a vector b to vector a
+`a.insert(a.end(), b.begin(), b.end());`
