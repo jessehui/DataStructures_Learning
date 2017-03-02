@@ -701,7 +701,25 @@ The function returns a pair, whose member pair::first is the lower bound of the 
 ### append a vector b to vector a
 `a.insert(a.end(), b.begin(), b.end());`
 
-### 回溯法
+### 回溯法backtracking
 回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。
 
 回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。
+
+
+
+
+### string转int
+```c++
+int main()
+{
+    string a = "1111";
+    int result;
+    result = atoi(a.c_str());
+    cout << "result = " << result << endl;
+    return 0;
+}
+```
+
+`atoi()`一般是对字符串使用, 所以使用string类型的c_str()函数就能调用atoi函数了.
+

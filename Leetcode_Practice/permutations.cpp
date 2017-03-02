@@ -104,7 +104,6 @@ private:
 
 //another try
 
-//bug
 class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {

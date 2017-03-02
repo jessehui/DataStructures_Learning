@@ -16,7 +16,21 @@
 
 using namespace std;
 
+
 int main()
+{
+    string a = "1111";
+    char *b = "10101";
+    int result;
+    result = atoi(a.c_str());
+    int result2 = atoi(b);
+    cout << "result = " << result2 << endl;
+    return 0;
+}
+
+
+
+int main2()
 {
     string str("Split me by whitespaces");
     string buf; // Have a buffer string
@@ -31,4 +45,5 @@ int main()
     {
         cout << *it << endl;
     }
+    return 0;
 }
