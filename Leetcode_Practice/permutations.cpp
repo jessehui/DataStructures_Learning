@@ -151,3 +151,45 @@ private:
 
 	}
 };
+
+
+
+
+//another method
+//accepted good speed
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> temp;
+        vector<int> copy = nums;
+        backtracking(result, temp, nums,copy);
+        return result;
+    }
+
+    void backtracking(vector<vector<int>>& result, vector<int>& temp, vector<int>& nums, vector<int>& copy)
+    {
+    	if(temp.size() == nums.size())
+    	{
+    		result.push_back(temp);
+    		return;
+    	}	
+
+
+    	
+    	for(int i = 0; i<copy.size(); i++)
+    	{
+    		temp.push_back(copy[i]);
+    		copy.erase(copy.begin()+i);
+    		backtracking(result, temp, nums, copy);
+//     		cout << "after backtracking: " ;
+// 			for(auto it = temp.begin(); it!=temp.end(); it++)
+// 				cout << *it << " ,";
+// 			cout << endl;
+    		copy.insert(copy.begin()+i,temp.back());
+    		temp.pop_back();
+    	}
+
+    	
+    }
+};
