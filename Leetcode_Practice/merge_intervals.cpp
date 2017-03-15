@@ -105,15 +105,24 @@ public:
                 max = intervals[i].end;
                 continue;
             }  
-              
-            if(intervals[i].start < max)
+
+            if(intervals[i].start <= max)
             {
-                if(intervals[i].end > max)
+                if(intervals[i].end >= max)
                 {
                     max = intervals[i].end;
+                    intervals[i-1].end = max;
+                    intervals.erase(intervals.begin() + i);
+                    i --;
+                }
+                if(intervals[i].end < max)
+                {
+                    intervals.erase(intervals.begin() + i);
+                    i --;
                 }
             }
         }
+        return intervals;
 
     }
 };
