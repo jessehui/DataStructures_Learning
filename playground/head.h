@@ -18,3 +18,17 @@ void print_vec(vector<T> vec)
     
     cout << endl;
 }
+
+
+void print_linked_list(ListNode *head)
+{
+	while(head != nullptr)
+	{
+		cout << head->val << " , " ;
+		head = head->next;
+	}
+	cout << endl;
+}
+
+
+
